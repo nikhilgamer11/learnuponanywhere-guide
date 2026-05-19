@@ -3,207 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LU Anywhere — Deal Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>LU Anywhere — Technical Qualifier</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#0B0F1A; --ink2:#141929; --ink3:#1E2640;
-  --teal:#00C9C4; --teal-dk:#009E9A; --teal-gl:rgba(0,201,196,.1);
-  --green:#2ECC71; --green-dk:#1A9E52; --green-gl:rgba(46,204,113,.1);
-  --amber:#F5A623; --amber-gl:rgba(245,166,35,.1);
-  --red:#E84855; --red-gl:rgba(232,72,85,.1);
-  --blue:#4A90E2; --blue-gl:rgba(74,144,226,.1);
-  --white:#FFFFFF; --dust:#8892A4; --line:rgba(255,255,255,.07);
-  --card:rgba(255,255,255,.03);
+:root {
+  --navy: #1B2B4B;
+  --teal: #00A9A5;
+  --teal-dk: #007A77;
+  --teal-lt: #E6F7F7;
+  --green: #16A34A;
+  --green-lt: #DCFCE7;
+  --green-bd: #86EFAC;
+  --amber: #D97706;
+  --amber-lt: #FEF3C7;
+  --amber-bd: #FCD34D;
+  --red: #DC2626;
+  --red-lt: #FEE2E2;
+  --red-bd: #FCA5A5;
+  --blue: #2563EB;
+  --blue-lt: #EFF6FF;
+  --blue-bd: #93C5FD;
+  --ink: #111827;
+  --ink2: #374151;
+  --slate: #6B7280;
+  --border: #E5E7EB;
+  --bg: #F9FAFB;
+  --white: #FFFFFF;
+  --card: #FFFFFF;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--white);min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 40% at 15% 0%,rgba(0,201,196,.06) 0%,transparent 60%),radial-gradient(ellipse 50% 30% at 90% 100%,rgba(0,201,196,.04) 0%,transparent 55%);pointer-events:none;z-index:0;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
 
 /* HEADER */
-.hdr{position:sticky;top:0;z-index:100;background:rgba(11,15,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;}
-.brand{display:flex;align-items:center;gap:10px;}
-.brand-mark{width:28px;height:28px;background:var(--teal);border-radius:7px;display:flex;align-items:center;justify-content:center;}
-.brand-mark svg{width:14px;height:14px;}
-.brand-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
-.brand-sub{font-size:9px;color:var(--dust);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-top:1px;}
-.hdr-score{display:flex;align-items:center;gap:10px;}
-.score-light{width:10px;height:10px;border-radius:50%;background:var(--dust);transition:all .4s;}
-.score-light.green{background:var(--green);box-shadow:0 0 8px rgba(46,204,113,.5);}
-.score-light.amber{background:var(--amber);box-shadow:0 0 8px rgba(245,166,35,.5);}
-.score-light.red{background:var(--red);box-shadow:0 0 8px rgba(232,72,85,.5);}
-.score-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--dust);letter-spacing:.06em;}
-.score-verdict{font-size:12px;font-weight:500;color:var(--white);transition:all .3s;}
+.hdr {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark { width: 32px; height: 32px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.brand-mark svg { width: 16px; height: 16px; }
+.brand-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); }
+.brand-sub { font-size: 10px; color: var(--slate); letter-spacing: .06em; margin-top: 1px; }
+.hdr-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px 5px 10px;
+}
+.hdr-dot { width: 10px; height: 10px; border-radius: 50%; background: #D1D5DB; transition: all .4s; flex-shrink: 0; }
+.hdr-dot.green { background: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,.15); }
+.hdr-dot.amber { background: var(--amber); box-shadow: 0 0 0 3px rgba(217,119,6,.15); }
+.hdr-dot.red { background: var(--red); box-shadow: 0 0 0 3px rgba(220,38,38,.15); }
+.hdr-verdict { font-size: 13px; font-weight: 600; color: var(--ink2); transition: all .3s; }
 
 /* LAYOUT */
-.app{position:relative;z-index:1;display:grid;grid-template-columns:1fr 360px;min-height:calc(100vh - 52px);}
-@media(max-width:900px){.app{grid-template-columns:1fr;}}
+.app { display: grid; grid-template-columns: 1fr 340px; min-height: calc(100vh - 60px); }
 
-/* LEFT PANEL */
-.left{padding:2rem;overflow-y:auto;}
-.section-wrap{margin-bottom:2rem;}
-.section-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--line);}
-
-/* QUESTION GROUPS */
-.q-group{background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:1.5rem;margin-bottom:12px;transition:border-color .3s;}
-.q-group.has-risk{border-color:rgba(232,72,85,.3);}
-.q-group.has-warn{border-color:rgba(245,166,35,.25);}
-.q-group.complete{border-color:rgba(46,204,113,.2);}
-.q-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:.35rem;letter-spacing:-.01em;}
-.q-hint{font-size:11.5px;color:var(--dust);line-height:1.6;margin-bottom:1.1rem;}
-
-/* OPTIONS */
-.opt-grid{display:flex;flex-direction:column;gap:7px;}
-.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:9px;border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);cursor:pointer;transition:all .18s;text-align:left;width:100%;}
-.opt:hover{background:rgba(0,201,196,.05);border-color:rgba(0,201,196,.25);transform:translateX(2px);}
-.opt.sel-green{background:var(--green-gl);border-color:rgba(46,204,113,.45);}
-.opt.sel-amber{background:var(--amber-gl);border-color:rgba(245,166,35,.45);}
-.opt.sel-red{background:var(--red-gl);border-color:rgba(232,72,85,.45);}
-.opt.sel-blue{background:var(--blue-gl);border-color:rgba(74,144,226,.45);}
-.opt-icon{font-size:16px;flex-shrink:0;width:24px;text-align:center;margin-top:1px;}
-.opt-label{font-size:13px;font-weight:500;line-height:1.3;}
-.opt-sub{font-size:11px;color:var(--dust);margin-top:2px;line-height:1.4;}
-.opt-dot{width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);flex-shrink:0;margin-left:auto;margin-top:3px;transition:all .18s;}
-.opt.sel-green .opt-dot{background:var(--green);border-color:var(--green);}
-.opt.sel-amber .opt-dot{background:var(--amber);border-color:var(--amber);}
-.opt.sel-red .opt-dot{background:var(--red);border-color:var(--red);}
-.opt.sel-blue .opt-dot{background:var(--blue);border-color:var(--blue);}
-
-/* INLINE RISK CARDS */
-.risk-card{border-radius:10px;padding:1rem 1.1rem;margin-top:10px;border-left:3px solid;animation:slideIn .3s ease forwards;display:none;}
-.risk-card.show{display:block;}
-@keyframes slideIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
-.risk-card.risk{background:var(--red-gl);border-color:var(--red);}
-.risk-card.warn{background:var(--amber-gl);border-color:var(--amber);}
-.risk-card.ok{background:var(--green-gl);border-color:var(--green);}
-.risk-card.flag{background:rgba(74,144,226,.08);border-color:var(--blue);}
-.rc-header{display:flex;align-items:center;gap:7px;margin-bottom:.5rem;}
-.rc-badge{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:2px 8px;border-radius:10px;}
-.risk .rc-badge{background:var(--red-gl);color:#FF8C93;border:1px solid rgba(232,72,85,.3);}
-.warn .rc-badge{background:var(--amber-gl);color:#F5C84C;border:1px solid rgba(245,166,35,.3);}
-.ok .rc-badge{background:var(--green-gl);color:#7DEFA1;border:1px solid rgba(46,204,113,.3);}
-.flag .rc-badge{background:var(--blue-gl);color:#89BFFF;border:1px solid rgba(74,144,226,.3);}
-.rc-title{font-size:12px;font-weight:600;}
-.risk .rc-title{color:#FF8C93;}
-.warn .rc-title{color:#F5C84C;}
-.ok .rc-title{color:#7DEFA1;}
-.flag .rc-title{color:#89BFFF;}
-.rc-rows{display:flex;flex-direction:column;gap:6px;}
-.rc-row{display:grid;grid-template-columns:80px 1fr;gap:6px;font-size:11.5px;}
-.rc-key{color:var(--dust);font-family:'DM Mono',monospace;font-size:10px;padding-top:1px;}
-.rc-val{color:rgba(255,255,255,.75);line-height:1.5;}
-.rc-val em{font-style:italic;color:rgba(255,255,255,.5);}
-.rc-val strong{color:var(--white);font-style:normal;}
-
-/* FURTHER DISCOVERY */
-.disc-block{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;padding:.8rem 1rem;margin-top:8px;display:none;}
-.disc-block.show{display:block;}
-.disc-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--dust);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
-.disc-q{font-size:11.5px;color:rgba(255,255,255,.6);padding:4px 0;border-bottom:1px solid var(--line);line-height:1.5;font-style:italic;}
-.disc-q:last-child{border-bottom:none;}
-.disc-q::before{content:'→ ';color:var(--teal);}
-
-/* GENERATE BTN */
-.gen-wrap{padding:1.5rem 0 .5rem;}
-.btn-gen{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;background:var(--teal);color:var(--ink);border:none;padding:14px 36px;border-radius:10px;cursor:pointer;width:100%;letter-spacing:.02em;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;opacity:.35;pointer-events:none;}
-.btn-gen.ready{opacity:1;pointer-events:all;}
-.btn-gen.ready:hover{background:var(--teal-dk);transform:translateY(-1px);}
-
-/* RIGHT PANEL */
-.right{background:var(--ink2);border-left:1px solid var(--line);padding:1.5rem;overflow-y:auto;position:sticky;top:52px;height:calc(100vh - 52px);}
-.panel-title{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:var(--dust);text-transform:uppercase;margin-bottom:1.25rem;}
-
-/* LIVE SCORE */
-.live-score{background:var(--ink3);border-radius:12px;padding:1.1rem;margin-bottom:1rem;text-align:center;}
-.ls-light{width:56px;height:56px;border-radius:50%;margin:0 auto .6rem;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .4s;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);}
-.ls-light.green{background:var(--green-gl);border-color:var(--green);box-shadow:0 0 20px rgba(46,204,113,.2);}
-.ls-light.amber{background:var(--amber-gl);border-color:var(--amber);box-shadow:0 0 20px rgba(245,166,35,.2);}
-.ls-light.red{background:var(--red-gl);border-color:var(--red);box-shadow:0 0 20px rgba(232,72,85,.2);}
-.ls-verdict{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;transition:all .3s;min-height:20px;}
-.ls-sub{font-size:10px;color:var(--dust);margin-top:3px;font-family:'DM Mono',monospace;letter-spacing:.05em;}
-.score-pills{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
-.sp{font-size:10px;padding:3px 10px;border-radius:10px;font-weight:500;}
-.sp-red{background:var(--red-gl);color:#FF8C93;border:1px solid rgba(232,72,85,.25);}
-.sp-amber{background:var(--amber-gl);color:#F5C84C;border:1px solid rgba(245,166,35,.25);}
-.sp-green{background:var(--green-gl);color:#7DEFA1;border:1px solid rgba(46,204,113,.25);}
-
-/* BRIEF BUILDER */
-.brief-section{margin-bottom:1rem;}
-.brief-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--dust);text-transform:uppercase;margin-bottom:.6rem;}
-.brief-row{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--line);font-size:11.5px;align-items:flex-start;}
-.brief-row:last-child{border-bottom:none;}
-.bk{color:var(--dust);min-width:72px;font-family:'DM Mono',monospace;font-size:9.5px;flex-shrink:0;padding-top:1px;}
-.bv{color:rgba(255,255,255,.7);line-height:1.45;transition:all .3s;}
-.bv.green{color:#7DEFA1;}
-.bv.amber{color:#F5C84C;}
-.bv.red{color:#FF8C93;}
-.bv.empty{color:rgba(255,255,255,.2);font-style:italic;}
-
-/* ESCALATION */
-.escalate-box{background:rgba(74,144,226,.07);border:1px solid rgba(74,144,226,.2);border-radius:10px;padding:1rem;margin-bottom:1rem;display:none;}
-.escalate-box.show{display:block;}
-.esc-title{font-size:11px;font-weight:600;color:#89BFFF;margin-bottom:.5rem;display:flex;align-items:center;gap:6px;}
-.esc-item{font-size:11px;color:rgba(255,255,255,.6);padding:3px 0;line-height:1.5;}
-.esc-item::before{content:'▸ ';color:#89BFFF;}
-
-/* RESULT */
-.result-wrap{display:none;padding:1.5rem 0;}
-.result-wrap.show{display:block;}
-.result-tl{border-radius:14px;padding:1.5rem;margin-bottom:1rem;}
-.result-tl.green{background:var(--green-gl);border:2px solid var(--green);}
-.result-tl.amber{background:var(--amber-gl);border:2px solid var(--amber);}
-.result-tl.red{background:var(--red-gl);border:2px solid var(--red);}
-.rt-icon{font-size:36px;margin-bottom:.5rem;}
-.rt-verdict{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.4rem;}
-.rt-summary{font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;}
-.result-section{background:var(--ink2);border:1px solid var(--line);border-radius:12px;padding:1.25rem;margin-bottom:.75rem;}
-.rs-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:.9rem;}
-.action-row{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);align-items:flex-start;}
-.action-row:last-child{border-bottom:none;}
-.an{width:20px;height:20px;border-radius:5px;background:var(--teal-gl);border:1px solid rgba(0,201,196,.2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:9px;color:var(--teal);flex-shrink:0;margin-top:1px;}
-.at{font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.55;}
-.at strong{color:var(--white);}
-.copy-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem;}
-.copy-btn{background:var(--teal-gl);border:1px solid rgba(0,201,196,.2);color:var(--teal);font-size:9px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:5px;cursor:pointer;letter-spacing:.06em;transition:all .18s;}
-.copy-btn:hover{background:rgba(0,201,196,.18);}
-.brief-final-row{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:12px;}
-.brief-final-row:last-child{border-bottom:none;}
-.bfk{color:var(--dust);font-family:'DM Mono',monospace;font-size:10px;}
-.bfv{color:rgba(255,255,255,.8);line-height:1.45;}
-.btn-reset{width:100%;background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);padding:10px;border-radius:9px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s;margin-top:.5rem;}
-.btn-reset:hover{border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.6);}
+/* LEFT */
+.left { padding: 2.5rem 2rem; max-width: 780px; }
 
 /* INTRO */
-.intro-wrap{padding:3rem 2rem;max-width:560px;}
-.intro-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--teal);margin-bottom:1rem;}
-.intro-h{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem;}
-.intro-h em{color:var(--teal);font-style:normal;}
-.intro-sub{font-size:14px;color:var(--dust);line-height:1.75;margin-bottom:2rem;}
-.intro-features{display:flex;flex-direction:column;gap:8px;margin-bottom:2rem;}
-.if-row{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,.65);}
-.if-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0;margin-top:6px;}
-.btn-start{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;background:var(--teal);color:var(--ink);border:none;padding:13px 36px;border-radius:9px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
-.btn-start:hover{background:var(--teal-dk);transform:translateY(-1px);}
+.intro { max-width: 580px; }
+.intro-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; margin-bottom: 1rem; }
+.intro-h { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--navy); line-height: 1.1; letter-spacing: -.02em; margin-bottom: 1rem; }
+.intro-h em { color: var(--teal); font-style: normal; }
+.intro-sub { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 2rem; }
+.intro-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2.25rem; }
+.if-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--ink2); line-height: 1.5; }
+.if-icon { width: 22px; height: 22px; border-radius: 6px; background: var(--teal-lt); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+.btn-start { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; background: var(--teal); color: var(--white); border: none; padding: 14px 36px; border-radius: 10px; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; letter-spacing: .01em; }
+.btn-start:hover { background: var(--teal-dk); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,169,165,.3); }
+
+/* SECTION LABEL */
+.section-wrap { margin-bottom: 2rem; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* QUESTION GROUP */
+.q-group { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.75rem; margin-bottom: 14px; transition: border-color .25s, box-shadow .25s; }
+.q-group:hover { box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.q-group.has-risk { border-color: var(--red-bd); }
+.q-group.has-warn { border-color: var(--amber-bd); }
+.q-group.complete { border-color: var(--green-bd); }
+.q-title { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: .4rem; letter-spacing: -.01em; }
+.q-hint { font-size: 13.5px; color: var(--slate); line-height: 1.6; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+
+/* OPTIONS */
+.opt-grid { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  display: flex; align-items: center; gap: 13px;
+  padding: 13px 16px; border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; transition: all .18s; text-align: left; width: 100%;
+}
+.opt:hover { background: var(--teal-lt); border-color: var(--teal); }
+.opt-icon { font-size: 18px; flex-shrink: 0; width: 28px; text-align: center; }
+.opt-content { flex: 1; }
+.opt-label { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.opt-sub { font-size: 12px; color: var(--slate); margin-top: 2px; line-height: 1.4; }
+.opt-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #D1D5DB; flex-shrink: 0; transition: all .18s; display: flex; align-items: center; justify-content: center; }
+
+/* Selected states */
+.opt.sel-green { background: var(--green-lt); border-color: var(--green-bd); }
+.opt.sel-green .opt-radio { background: var(--green); border-color: var(--green); }
+.opt.sel-green .opt-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.opt.sel-green .opt-label { color: var(--green); }
+
+.opt.sel-amber { background: var(--amber-lt); border-color: var(--amber-bd); }
+.opt.sel-amber .opt-radio { background: var(--amber); border-color: var(--amber); }
+.opt.sel-amber .opt-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.opt.sel-amber .opt-label { color: var(--amber); }
+
+.opt.sel-red { background: var(--red-lt); border-color: var(--red-bd); }
+.opt.sel-red .opt-radio { background: var(--red); border-color: var(--red); }
+.opt.sel-red .opt-radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+.opt.sel-red .opt-label { color: var(--red); }
+
+/* RISK CARDS */
+.risk-card { border-radius: 10px; padding: 1.1rem 1.25rem; margin-top: 12px; border-left: 4px solid; display: none; animation: slideIn .3s ease; }
+.risk-card.show { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+
+.risk-card.risk { background: var(--red-lt); border-color: var(--red); }
+.risk-card.warn { background: var(--amber-lt); border-color: var(--amber); }
+.risk-card.ok { background: var(--green-lt); border-color: var(--green); }
+.risk-card.info { background: var(--blue-lt); border-color: var(--blue); }
+
+.rc-header { display: flex; align-items: center; gap: 8px; margin-bottom: .75rem; flex-wrap: wrap; }
+.rc-badge { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+.risk .rc-badge { background: var(--red); color: white; }
+.warn .rc-badge { background: var(--amber); color: white; }
+.ok .rc-badge { background: var(--green); color: white; }
+.info .rc-badge { background: var(--blue); color: white; }
+.rc-title { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+.rc-rows { display: flex; flex-direction: column; gap: 8px; }
+.rc-row { display: grid; grid-template-columns: 88px 1fr; gap: 8px; font-size: 13.5px; }
+.rc-key { color: var(--slate); font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding-top: 2px; }
+.rc-val { color: var(--ink2); line-height: 1.6; }
+.rc-val em { font-style: italic; color: var(--ink); background: rgba(0,0,0,.04); padding: 2px 6px; border-radius: 4px; display: inline-block; margin: 2px 0; font-size: 13px; }
+
+/* FURTHER DISCOVERY */
+.disc-block { background: rgba(0,0,0,.03); border: 1px solid rgba(0,0,0,.07); border-radius: 8px; padding: .9rem 1rem; margin-top: 10px; display: none; }
+.disc-block.show { display: block; }
+.disc-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--slate); text-transform: uppercase; margin-bottom: 8px; }
+.disc-q { font-size: 13px; color: var(--ink2); padding: 5px 0; border-bottom: 1px solid rgba(0,0,0,.06); line-height: 1.55; font-style: italic; }
+.disc-q:last-child { border-bottom: none; }
+.disc-q::before { content: '→ '; color: var(--teal); font-style: normal; font-weight: 600; }
+
+/* GENERATE BTN */
+.gen-wrap { padding: 1.5rem 0 .5rem; }
+.btn-gen { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; background: #E5E7EB; color: #9CA3AF; border: none; padding: 15px; border-radius: 10px; cursor: not-allowed; width: 100%; transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-gen.ready { background: var(--navy); color: white; cursor: pointer; }
+.btn-gen.ready:hover { background: var(--teal); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,169,165,.3); }
+
+/* RIGHT PANEL */
+.right { background: var(--white); border-left: 1px solid var(--border); padding: 1.75rem 1.5rem; position: sticky; top: 60px; height: calc(100vh - 60px); overflow-y: auto; }
+.panel-title { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--slate); text-transform: uppercase; margin-bottom: 1.25rem; }
+
+/* LIVE SCORE */
+.live-score { border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; text-align: center; border: 2px solid var(--border); background: var(--bg); transition: all .4s; }
+.live-score.green { background: var(--green-lt); border-color: var(--green-bd); }
+.live-score.amber { background: var(--amber-lt); border-color: var(--amber-bd); }
+.live-score.red { background: var(--red-lt); border-color: var(--red-bd); }
+
+.ls-emoji { font-size: 32px; margin-bottom: .5rem; transition: all .3s; }
+.ls-verdict { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 3px; transition: all .3s; }
+.ls-sub { font-size: 10px; font-weight: 600; letter-spacing: .08em; color: var(--slate); text-transform: uppercase; transition: all .3s; }
+.live-score.green .ls-verdict { color: var(--green); }
+.live-score.amber .ls-verdict { color: var(--amber); }
+.live-score.red .ls-verdict { color: var(--red); }
+.live-score.green .ls-sub { color: var(--green); }
+.live-score.amber .ls-sub { color: var(--amber); }
+.live-score.red .ls-sub { color: var(--red); }
+
+.score-pills { display: flex; gap: 5px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+.sp { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+.sp-red { background: var(--red-lt); color: var(--red); border: 1px solid var(--red-bd); }
+.sp-amber { background: var(--amber-lt); color: var(--amber); border: 1px solid var(--amber-bd); }
+.sp-green { background: var(--green-lt); color: var(--green); border: 1px solid var(--green-bd); }
+
+/* ESCALATE */
+.escalate-box { background: var(--blue-lt); border: 1.5px solid var(--blue-bd); border-radius: 10px; padding: 1rem 1.1rem; margin-bottom: 1rem; display: none; }
+.escalate-box.show { display: block; }
+.esc-title { font-size: 12px; font-weight: 700; color: var(--blue); margin-bottom: .6rem; display: flex; align-items: center; gap: 6px; }
+.esc-item { font-size: 12px; color: var(--ink2); padding: 3px 0; line-height: 1.5; }
+.esc-item::before { content: '▸ '; color: var(--blue); font-weight: 700; }
+
+/* BRIEF */
+.brief-section { margin-bottom: .5rem; }
+.brief-title-row { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--slate); text-transform: uppercase; margin-bottom: .75rem; }
+.brief-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.brief-row:last-child { border-bottom: none; }
+.bk { font-size: 11px; font-weight: 600; color: var(--slate); min-width: 82px; flex-shrink: 0; padding-top: 1px; }
+.bv { font-size: 12px; color: var(--ink2); line-height: 1.4; transition: all .3s; }
+.bv.green { color: var(--green); font-weight: 500; }
+.bv.amber { color: var(--amber); font-weight: 500; }
+.bv.red { color: var(--red); font-weight: 500; }
+.bv.empty { color: #D1D5DB; font-style: italic; }
+
+/* RESULT */
+.result-wrap { display: none; padding-top: 1rem; }
+.result-wrap.show { display: block; }
+.result-tl { border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; border: 2px solid; }
+.result-tl.green { background: var(--green-lt); border-color: var(--green-bd); }
+.result-tl.amber { background: var(--amber-lt); border-color: var(--amber-bd); }
+.result-tl.red { background: var(--red-lt); border-color: var(--red-bd); }
+.rt-icon { font-size: 40px; margin-bottom: .6rem; }
+.rt-verdict { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--navy); letter-spacing: -.01em; margin-bottom: .4rem; }
+.rt-summary { font-size: 14px; color: var(--ink2); line-height: 1.7; }
+
+.result-section { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: .75rem; }
+.rs-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; color: var(--teal); text-transform: uppercase; margin-bottom: 1rem; }
+.action-row { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.action-row:last-child { border-bottom: none; }
+.an { width: 22px; height: 22px; border-radius: 6px; background: var(--teal-lt); border: 1px solid var(--teal); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--teal); flex-shrink: 0; margin-top: 1px; }
+.at { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+.at strong { color: var(--ink); }
+
+.copy-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+.copy-btn { background: var(--teal-lt); border: 1px solid var(--teal); color: var(--teal); font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 6px; cursor: pointer; transition: all .18s; font-family: 'Inter', sans-serif; }
+.copy-btn:hover { background: var(--teal); color: white; }
+
+.bfr { display: grid; grid-template-columns: 110px 1fr; gap: 4px 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.bfr:last-child { border-bottom: none; }
+.bfk { color: var(--slate); font-size: 11px; font-weight: 600; }
+.bfv { color: var(--ink2); line-height: 1.45; }
+
+.btn-reset { width: 100%; background: transparent; border: 1.5px solid var(--border); color: var(--slate); padding: 11px; border-radius: 9px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all .18s; margin-top: .5rem; font-weight: 500; }
+.btn-reset:hover { border-color: var(--navy); color: var(--navy); }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <div class="hdr">
   <div class="brand">
     <div class="brand-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#0B0F1A" stroke-width="2.5" stroke-linecap="round">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round">
         <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
       </svg>
     </div>
-    <div><div class="brand-name">LearnUpon Anywhere</div><div class="brand-sub">DEAL INTELLIGENCE</div></div>
-  </div>
-  <div class="hdr-score">
-    <div class="score-light" id="hdr-light"></div>
     <div>
-      <div class="score-label">DEAL SIGNAL</div>
-      <div class="score-verdict" id="hdr-verdict">Not yet assessed</div>
+      <div class="brand-name">LearnUpon Anywhere</div>
+      <div class="brand-sub">TECHNICAL QUALIFIER</div>
     </div>
+  </div>
+  <div class="hdr-badge">
+    <div class="hdr-dot" id="hdr-dot"></div>
+    <div class="hdr-verdict" id="hdr-verdict">Not yet assessed</div>
   </div>
 </div>
 
@@ -213,26 +275,26 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="left" id="left-panel">
 
   <!-- INTRO -->
-  <div id="intro-screen" class="intro-wrap">
-    <div class="intro-eye">SE PRE-CALL TOOL</div>
+  <div id="intro-screen" class="intro">
+    <div class="intro-eyebrow">SE Pre-Call Tool</div>
     <h1 class="intro-h">Is this an<br><em>Anywhere</em> deal?</h1>
-    <p class="intro-sub">Answer the discovery questions below as you prep for your call. The tool flags risks in real time, tells you what to ask next, and builds your prospect brief automatically.</p>
+    <p class="intro-sub">Work through the discovery questions below as you prep for your call. Risk flags appear in real time, active suggestions tell you exactly what to say, and your prospect brief builds automatically on the right.</p>
     <div class="intro-features">
-      <div class="if-row"><div class="if-dot"></div><div>Live risk flags appear as you answer — no waiting until the end</div></div>
-      <div class="if-row"><div class="if-dot"></div><div>Active suggestions: what to say, what to ask, what to escalate to your manager</div></div>
-      <div class="if-row"><div class="if-dot"></div><div>Prospect brief builds on the right in real time — ready to copy into Salesforce</div></div>
-      <div class="if-row"><div class="if-dot"></div><div>Based on all LUA discovery questions from SE collateral, technical docs, and training materials</div></div>
+      <div class="if-row"><div class="if-icon">⚡</div>Live risk flags appear the moment you select an answer — no waiting</div>
+      <div class="if-row"><div class="if-icon">💬</div>Exact phrases to say, questions to ask, what to escalate to your manager</div>
+      <div class="if-row"><div class="if-icon">📋</div>Prospect brief builds on the right in real time — copy into Salesforce in one click</div>
+      <div class="if-row"><div class="if-icon">🏁</div>Covers every discovery question from SE collateral, technical docs, and training materials</div>
     </div>
     <button class="btn-start" onclick="startTool()">
       Start qualifying
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
   </div>
 
   <!-- QUESTIONS -->
   <div id="q-screen" style="display:none;">
 
-  <!-- GROUP A: Where and Who -->
+  <!-- A: WHERE AND WHO -->
   <div class="section-wrap">
     <div class="section-label">A — Where and Who</div>
 
@@ -240,21 +302,21 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="q-title">Where exactly do you want learning to appear?</div>
       <div class="q-hint">The location determines the iFrame approach, SSO requirements, and what the learner experience will feel like. Be as specific as possible.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('A1','crm','green',this)"><div class="opt-icon">⚡</div><div><div class="opt-label">Inside a CRM — Salesforce, HubSpot, or similar</div><div class="opt-sub">Learner stays in their sales or service tool</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A1','portal','green',this)"><div class="opt-icon">🌐</div><div><div class="opt-label">Partner or customer portal</div><div class="opt-sub">Branded web experience for external audiences</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A1','mobile','amber',this)"><div class="opt-icon">📱</div><div><div class="opt-label">Inside a mobile app</div><div class="opt-sub">Embedded within the company's own iOS or Android app</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A1','product','green',this)"><div class="opt-icon">🚀</div><div><div class="opt-label">Inside a SaaS product</div><div class="opt-sub">Training triggered within the prospect's own software</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A1','intranet','green',this)"><div class="opt-icon">🏢</div><div><div class="opt-label">Company intranet or internal platform</div><div class="opt-sub">Browser-based internal tool — SharePoint, Confluence, etc.</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A1','unknown','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not confirmed yet</div><div class="opt-sub">This is a discovery question to ask on the call</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('A1','crm','green',this)"><div class="opt-icon">⚡</div><div class="opt-content"><div class="opt-label">Inside a CRM — Salesforce, HubSpot, or similar</div><div class="opt-sub">Learner stays in their sales or service tool</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A1','portal','green',this)"><div class="opt-icon">🌐</div><div class="opt-content"><div class="opt-label">Partner or customer portal</div><div class="opt-sub">Branded web experience for external audiences</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A1','mobile','amber',this)"><div class="opt-icon">📱</div><div class="opt-content"><div class="opt-label">Inside a mobile app</div><div class="opt-sub">Embedded within the company's own iOS or Android app</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A1','product','green',this)"><div class="opt-icon">🚀</div><div class="opt-content"><div class="opt-label">Inside a SaaS product</div><div class="opt-sub">Training triggered within the prospect's own software</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A1','intranet','green',this)"><div class="opt-icon">🏢</div><div class="opt-content"><div class="opt-label">Company intranet or internal platform</div><div class="opt-sub">Browser-based internal tool — SharePoint, Confluence, etc.</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A1','unknown','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not confirmed yet</div><div class="opt-sub">This is a discovery question to ask on the call</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card warn" id="rc-A1-mobile">
-        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Mobile app embedding — app architecture must be confirmed</span></div>
+        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Mobile app embedding — app architecture must be confirmed first</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Mobile embedding works well on hybrid apps but is not supported on fully native apps without a Webview. This needs qualifying before scoping.</div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Mobile embedding works well on hybrid apps but is not supported on fully native apps without a Webview. This needs qualifying before you scope anything.</div></div>
           <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"Before I scope this, can you tell me how your app is built — is it native Swift or Kotlin, or does it use a wrapper like React Native or Flutter?"</em></div></div>
         </div>
         <div class="disc-block show">
-          <div class="disc-label">Further discovery</div>
+          <div class="disc-label">Further discovery to ask</div>
           <div class="disc-q">"How is your mobile app built — native (Swift/Kotlin), Pure Hybrid/Wrapper, or Cross-Platform (React Native, Flutter)?"</div>
           <div class="disc-q">"Are you planning to use a WebView to serve the learning content inside the app?"</div>
           <div class="disc-q">"What percentage of your learners would access training via the mobile app today?"</div>
@@ -262,49 +324,49 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
       <div class="risk-card ok" id="rc-A1-crm">
-        <div class="rc-header"><span class="rc-badge">Strong signal</span><span class="rc-title">CRM embedding — this is a high-value use case</span></div>
+        <div class="rc-header"><span class="rc-badge">Strong signal</span><span class="rc-title">CRM embedding — high-value use case, lead with the Salesforce demo</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Approach</div><div class="rc-val">Lead with the Salesforce demo. Show the learner completing a course without leaving their CRM view. This is the wow moment that moves deals forward.</div></div>
           <div class="rc-row"><div class="rc-key">Proof</div><div class="rc-val">Visa reduced their support team from 5 to 0.5 by embedding training in the customer journey. 1 support ticket per 10,000 logins.</div></div>
+          <div class="rc-row"><div class="rc-key">Demo tip</div><div class="rc-val">Show the learner completing a course without leaving the CRM view. This is the wow moment that moves deals forward.</div></div>
         </div>
       </div>
     </div>
 
     <div class="q-group" id="grp-A2">
       <div class="q-title">Who is the primary audience for this learning?</div>
-      <div class="q-hint">Audience type determines the proof point to lead with and the use case framing for the demo.</div>
+      <div class="q-hint">Audience type determines the proof point to lead with and how to frame the demo.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('A2','frontline','green',this)"><div class="opt-icon">🏪</div><div><div class="opt-label">Frontline or field workforce</div><div class="opt-sub">Retail, food service, field engineers — phone-first workers</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A2','customer','green',this)"><div class="opt-icon">🚀</div><div><div class="opt-label">External customers or users</div><div class="opt-sub">SaaS customer education, onboarding, or product adoption</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A2','partner','green',this)"><div class="opt-icon">🤝</div><div><div class="opt-label">Partners, resellers, or channel</div><div class="opt-sub">Training external business partners via a portal</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A2','employee','amber',this)"><div class="opt-icon">👥</div><div><div class="opt-label">Internal employees</div><div class="opt-sub">Standard L&D — embedded in an HRIS, intranet, or CRM</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('A2','frontline','green',this)"><div class="opt-icon">🏪</div><div class="opt-content"><div class="opt-label">Frontline or field workforce</div><div class="opt-sub">Retail, food service, field engineers — phone-first workers</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A2','customer','green',this)"><div class="opt-icon">🚀</div><div class="opt-content"><div class="opt-label">External customers or users</div><div class="opt-sub">SaaS customer education, onboarding, or product adoption</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A2','partner','green',this)"><div class="opt-icon">🤝</div><div class="opt-content"><div class="opt-label">Partners, resellers, or channel</div><div class="opt-sub">Training external business partners via a portal</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A2','employee','amber',this)"><div class="opt-icon">👥</div><div class="opt-content"><div class="opt-label">Internal employees</div><div class="opt-sub">Standard L&D — embedded in an HRIS, intranet, or CRM</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card ok" id="rc-A2-frontline">
         <div class="rc-header"><span class="rc-badge">Strong signal</span><span class="rc-title">Frontline workforce — classic Anywhere use case</span></div>
         <div class="rc-rows">
           <div class="rc-row"><div class="rc-key">Proof</div><div class="rc-val">Chick-fil-A: 300,000 users across 3,000 restaurants, compliance training embedded in their Pathway app. Staff complete training right within the app.</div></div>
-          <div class="rc-row"><div class="rc-key">Lead with</div><div class="rc-val"><em>"Staff are on the shop floor — they never reach a desktop. Anywhere puts training on the device they already have in their pocket."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Lead with</div><div class="rc-val"><em>"Staff are on the shop floor all day — they never reach a desktop. Anywhere puts training on the device they already have in their pocket."</em></div></div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-A2-employee">
-        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Internal employee training — confirm the embedded use case is real</span></div>
+        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Internal L&D — confirm Anywhere is genuinely needed here</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Internal L&D can often be solved with a standard LMS setup. Confirm Anywhere is genuinely needed — not just the regular LU platform.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What is the reason learning cannot live in the LearnUpon portal directly? Is there a specific workflow or tool you need it to sit inside?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Internal L&D can often be solved with a standard LMS setup. Confirm Anywhere is needed — not just the regular LearnUpon platform.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What is the reason training cannot live in the LearnUpon portal directly? Is there a specific workflow or tool you need it to sit inside?"</em></div></div>
         </div>
       </div>
     </div>
 
     <div class="q-group" id="grp-A3">
-      <div class="q-title">Do they have a clear MVP goal for what they want to deliver first?</div>
-      <div class="q-hint">A focused MVP is a strong buying signal. Vague scope usually means the deal is earlier stage than it appears.</div>
+      <div class="q-title">Do they have a clear MVP goal for what to deliver first?</div>
+      <div class="q-hint">A focused MVP means the test can be scoped cleanly. Vague scope means the test will be hard to define and even harder to validate.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('A3','clear','green',this)"><div class="opt-icon">✅</div><div><div class="opt-label">Yes — specific use case and first course in mind</div><div class="opt-sub">They know exactly what they want to embed and for whom</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A3','partial','amber',this)"><div class="opt-icon">⚡</div><div><div class="opt-label">Partial — general intent but no specific content yet</div><div class="opt-sub">They know they want Anywhere but have not defined the first use case</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('A3','none','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not defined — exploring the concept</div><div class="opt-sub">Early stage — the use case is still being shaped</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('A3','clear','green',this)"><div class="opt-icon">✅</div><div class="opt-content"><div class="opt-label">Yes — specific use case and first course defined</div><div class="opt-sub">They know exactly what to embed and for whom</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A3','partial','amber',this)"><div class="opt-icon">⚡</div><div class="opt-content"><div class="opt-label">Partial — general intent but no specific content yet</div><div class="opt-sub">They want Anywhere but have not defined the first use case</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('A3','none','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not defined — exploring the concept</div><div class="opt-sub">Early stage — use case still being shaped</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card warn" id="rc-A3-partial">
-        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">No clear MVP — help them define it before scoping</span></div>
+        <div class="rc-header"><span class="rc-badge">Action needed</span><span class="rc-title">No clear MVP — help them define one before scoping the test</span></div>
         <div class="rc-rows">
           <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Without a defined MVP, the test scope will be unclear and the deal will stall. Your job is to help them narrow to one use case.</div></div>
           <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"Let us focus on one thing first. If you could embed one course in one place for one audience — what would that be?"</em></div></div>
@@ -314,78 +376,75 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 
-  <!-- GROUP B: Mobile Architecture -->
+  <!-- B: MOBILE -->
   <div class="section-wrap">
     <div class="section-label">B — Mobile Architecture</div>
 
     <div class="q-group" id="grp-B1">
       <div class="q-title">How is their platform or mobile app built?</div>
-      <div class="q-hint">This is the most important technical question in any Anywhere deal. Get this answer before you demo anything on mobile.</div>
+      <div class="q-hint">The most important technical question in any Anywhere deal. Get this answer before demoing anything on mobile.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('B1','browser','green',this)"><div class="opt-icon">🌐</div><div><div class="opt-label">Desktop or mobile browser</div><div class="opt-sub">Web app — Chrome, Safari, any browser on any device</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('B1','hybrid','amber',this)"><div class="opt-icon">📱</div><div><div class="opt-label">Hybrid or wrapper app (React Native, Flutter, Pure Hybrid)</div><div class="opt-sub">Uses a WebView internally — Anywhere works with minor caveats</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('B1','native','red',this)"><div class="opt-icon">⚙️</div><div><div class="opt-label">Fully native app (Swift / Kotlin only)</div><div class="opt-sub">No wrapper — 100% native code, no WebView</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('B1','unknown','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not confirmed yet</div><div class="opt-sub">This must be asked before scoping any mobile deal</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('B1','browser','green',this)"><div class="opt-icon">🌐</div><div class="opt-content"><div class="opt-label">Desktop or mobile browser</div><div class="opt-sub">Web app — Chrome, Safari, any browser on any device</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('B1','hybrid','amber',this)"><div class="opt-icon">📱</div><div class="opt-content"><div class="opt-label">Hybrid or wrapper app — React Native, Flutter, Pure Hybrid</div><div class="opt-sub">Uses a WebView internally — Anywhere works with minor caveats</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('B1','native','red',this)"><div class="opt-icon">⚙️</div><div class="opt-content"><div class="opt-label">Fully native app — Swift or Kotlin only</div><div class="opt-sub">No wrapper, no WebView — 100% native code</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('B1','unknown','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Must be asked before scoping any mobile deal</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-B1-native">
         <div class="rc-header"><span class="rc-badge">High risk</span><span class="rc-title">Fully native app — Anywhere is not natively supported</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">LUA loads into an iFrame (wrapper). Native apps built in Swift or Kotlin do not have a WebView by default. This requires significant dev work and has a high factor of unknowns.</div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">LUA loads into an iFrame (wrapper). Native apps built in Swift or Kotlin do not have a WebView by default. This requires significant dev work and carries high unknowns.</div></div>
           <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"LearnUpon Anywhere loads inside a WebView — a browser window within the app. If your app is fully native today, your dev team would need to add WebView support. Is that something they could explore?"</em></div></div>
           <div class="rc-row"><div class="rc-key">Do not</div><div class="rc-val">Do not demo mobile Anywhere or commit to a mobile test until the Webview question is resolved.</div></div>
-          <div class="rc-row"><div class="rc-key">Alternative</div><div class="rc-val">Offer a browser-based version of Anywhere as an interim option — mobile browser is fully supported with no limitations.</div></div>
+          <div class="rc-row"><div class="rc-key">Alternative</div><div class="rc-val">Offer mobile browser as an interim option — fully supported, no limitations, zero dev work required.</div></div>
         </div>
         <div class="disc-block show">
-          <div class="disc-label">Further discovery</div>
+          <div class="disc-label">Further discovery to ask</div>
           <div class="disc-q">"Is there any plan to add WebView capability to the app architecture in the near term?"</div>
-          <div class="disc-q">"Who from your dev team would own the Webview implementation? How long would that take?"</div>
-          <div class="disc-q">"Would a mobile browser experience be acceptable as a starting point while the Webview work is scoped?"</div>
+          <div class="disc-q">"Who from your dev team would own the Webview implementation, and how long would that realistically take?"</div>
+          <div class="disc-q">"Would mobile browser be acceptable as a starting point while the WebView work is scoped?"</div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-B1-hybrid">
         <div class="rc-header"><span class="rc-badge">Proceed with care</span><span class="rc-title">Hybrid app — works well but two known limitations apply</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Limitations</div><div class="rc-val">Video/audio file downloads are blocked by default. Assignment recording is blocked by mobile permissions. Both are fixable with a short code change.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Do your learners need to download video or audio for offline use? And will you use assignment modules that require video or audio recording?"</em></div></div>
-          <div class="rc-row"><div class="rc-key">Note</div><div class="rc-val">Large dependency on developer competency. Confirm dev resource is available before committing to a test timeline.</div></div>
+          <div class="rc-row"><div class="rc-key">Limitations</div><div class="rc-val">Video/audio file downloads are blocked by default. Assignment recording is blocked by mobile permissions. Both are fixable with a short code change from their dev team.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Do learners need to download video or audio for offline use? Will you use assignment modules requiring video or audio recording?"</em></div></div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-B1-unknown">
-        <div class="rc-header"><span class="rc-badge">Must ask</span><span class="rc-title">App architecture not confirmed — this is your first question on the call</span></div>
+        <div class="rc-header"><span class="rc-badge">Must ask</span><span class="rc-title">App architecture not confirmed — ask this first on the call</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Why</div><div class="rc-val">This single answer changes the entire scoping conversation. Do not proceed with a mobile demo or test proposal until you have this answer.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask first</div><div class="rc-val"><em>"Before we go any further — how is your app built? Is it native Swift or Kotlin, or does it use a wrapper framework like React Native or Flutter?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask first</div><div class="rc-val"><em>"Before we go further — how is your app built? Native Swift or Kotlin, or a wrapper framework like React Native or Flutter?"</em></div></div>
         </div>
       </div>
       <div class="risk-card ok" id="rc-B1-browser">
         <div class="rc-header"><span class="rc-badge">Green signal</span><span class="rc-title">Browser-based — fully supported, no limitations</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Status</div><div class="rc-val">Desktop and mobile browser is fully supported. All module types work. SCORM/xAPI works. White-labelled portals supported. Best starting point for most deals.</div></div>
-          <div class="rc-row"><div class="rc-key">Note</div><div class="rc-val">LUA is the most lightweight and easiest to implement headless LMS solution — more so than Absorb or Docebo.</div></div>
+          <div class="rc-row"><div class="rc-key">Status</div><div class="rc-val">Desktop and mobile browser is fully supported. All module types work. SCORM/xAPI works. White-labelled portals supported. Best starting point for any deal.</div></div>
+          <div class="rc-row"><div class="rc-key">Competitor</div><div class="rc-val">LUA is the most lightweight and easiest to implement headless LMS — more so than Absorb or Docebo. Neither competitor supports native apps either.</div></div>
         </div>
       </div>
     </div>
 
     <div class="q-group" id="grp-B2">
       <div class="q-title">Is mobile-first a critical value driver for this deal?</div>
-      <div class="q-hint">"Mobile-first" means different things to different prospects. The answer here determines how much the app architecture risk actually matters.</div>
+      <div class="q-hint">"Mobile-first" means different things to different prospects. This answer determines how much the app architecture risk matters.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('B2','critical','red',this)"><div class="opt-icon">🔴</div><div><div class="opt-label">Critical — mobile is the only acceptable experience</div><div class="opt-sub">The deal hinges on a great mobile learning experience</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('B2','important','amber',this)"><div class="opt-icon">🟡</div><div><div class="opt-label">Important — mobile preferred but desktop also acceptable</div><div class="opt-sub">Most learners will be mobile but it is not the only method</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('B2','low','green',this)"><div class="opt-icon">🟢</div><div><div class="opt-label">Low — primarily desktop or browser</div><div class="opt-sub">Mobile is a secondary consideration for this prospect</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('B2','critical','red',this)"><div class="opt-icon">🔴</div><div class="opt-content"><div class="opt-label">Critical — mobile is the only acceptable experience</div><div class="opt-sub">The deal hinges on a great mobile learning experience</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('B2','important','amber',this)"><div class="opt-icon">🟡</div><div class="opt-content"><div class="opt-label">Important — mobile preferred but desktop also acceptable</div><div class="opt-sub">Most learners will be mobile but it is not the only method</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('B2','low','green',this)"><div class="opt-icon">🟢</div><div class="opt-content"><div class="opt-label">Low — primarily desktop or browser</div><div class="opt-sub">Mobile is a secondary consideration</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-B2-critical">
-        <div class="rc-header"><span class="rc-badge">High risk</span><span class="rc-title">Mobile-critical + architecture unconfirmed — validate before progressing</span></div>
+        <div class="rc-header"><span class="rc-badge">High risk</span><span class="rc-title">Mobile-critical — validate app architecture before progressing</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">If mobile is the core requirement and they have a native app, this deal has significant implementation risk. Do not let this progress to demo without confirming the app architecture.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"When you say mobile-first — is mobile the only access method, or would desktop browser be acceptable as a starting point during the test?"</em></div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What percentage of your learners would access training via mobile versus desktop today?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">If mobile is the core requirement and they have a native app, this deal has significant implementation risk. Do not progress to demo without confirming the app architecture.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"When you say mobile-first — is mobile the only access method, or would desktop browser be acceptable as a starting point during the initial test?"</em></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- GROUP C: Content and Media -->
+  <!-- C: CONTENT -->
   <div class="section-wrap">
     <div class="section-label">C — Content and Media</div>
 
@@ -393,98 +452,96 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="q-title">What content types are they planning to use in Anywhere?</div>
       <div class="q-hint">Some content types have known limitations in embedded environments — particularly on mobile. Select the most complex type they need.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('C1','simple','green',this)"><div class="opt-icon">📄</div><div><div class="opt-label">Text, images, documents, video streaming</div><div class="opt-sub">Standard content — no download or recording requirements</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C1','scorm_direct','green',this)"><div class="opt-icon">📦</div><div><div class="opt-label">SCORM or xAPI — uploaded directly to LearnUpon</div><div class="opt-sub">Content lives in LU — not dispatched from an external tool</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C1','scorm_dispatch','red',this)"><div class="opt-icon">⚠️</div><div><div class="opt-label">SCORM dispatched from a third-party authoring tool</div><div class="opt-sub">Content is hosted externally and dispatched into LearnUpon</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C1','assignment','red',this)"><div class="opt-icon">🎥</div><div><div class="opt-label">Assignment modules requiring video or audio recording</div><div class="opt-sub">Learners need to record and submit responses</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C1','offline','red',this)"><div class="opt-icon">📥</div><div><div class="opt-label">Offline video or audio download required</div><div class="opt-sub">Learners need to download content for use without internet</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('C1','simple','green',this)"><div class="opt-icon">📄</div><div class="opt-content"><div class="opt-label">Text, images, documents, video streaming</div><div class="opt-sub">Standard content — no download or recording requirements</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C1','scorm_direct','green',this)"><div class="opt-icon">📦</div><div class="opt-content"><div class="opt-label">SCORM or xAPI — uploaded directly to LearnUpon</div><div class="opt-sub">Content lives in LU — not dispatched from an external tool</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C1','scorm_dispatch','red',this)"><div class="opt-icon">⚠️</div><div class="opt-content"><div class="opt-label">SCORM dispatched from a third-party authoring tool</div><div class="opt-sub">Content hosted externally and dispatched into LearnUpon</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C1','assignment','red',this)"><div class="opt-icon">🎥</div><div class="opt-content"><div class="opt-label">Assignment modules requiring video or audio recording</div><div class="opt-sub">Learners need to record and submit responses</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C1','offline','red',this)"><div class="opt-icon">📥</div><div class="opt-content"><div class="opt-label">Offline video or audio download required</div><div class="opt-sub">Learners need to download content without internet access</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-C1-scorm_dispatch">
-        <div class="rc-header"><span class="rc-badge">Action required</span><span class="rc-title">Dispatched SCORM — content vault must be enabled first</span></div>
+        <div class="rc-header"><span class="rc-badge">Action required</span><span class="rc-title">Dispatched SCORM — Content Vault must be enabled before the test</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">SCORM dispatched from an external tool (e.g. Articulate, Adobe Captivate) needs Content Vault enabled in the LU portal settings. Missing this step breaks content in the embedded view.</div></div>
-          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Confirm Content Vault is enabled before scoping the test. Quick fix but it cannot be skipped.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What tool are you using to create and host your SCORM content? Is it dispatched from Articulate or another platform, or uploaded directly into LearnUpon?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">SCORM dispatched from an external tool (Articulate, Adobe Captivate etc.) needs Content Vault enabled in the LU portal settings. Missing this step breaks content in the embedded view.</div></div>
+          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Confirm Content Vault is enabled before scoping the test. Quick fix but cannot be skipped.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is your SCORM content dispatched from Articulate or another platform, or is it uploaded directly into LearnUpon?"</em></div></div>
         </div>
       </div>
       <div class="risk-card risk" id="rc-C1-assignment">
         <div class="rc-header"><span class="rc-badge">Technical flag</span><span class="rc-title">Assignment recording blocked on mobile by default</span></div>
         <div class="rc-rows">
           <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Video and audio recording in Assignment modules is blocked by default on hybrid and native mobile apps due to iFrame permission restrictions.</div></div>
-          <div class="rc-row"><div class="rc-key">Fix</div><div class="rc-val">Fixable with a short iFrame permission code change by their dev team. Needs to be flagged before the test is scoped.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is assignment recording critical to the first use case, or could it be excluded from the initial test?"</em></div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Does your dev team have capacity to apply a short iFrame permission update as part of the test setup?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Fix</div><div class="rc-val">Fixable with a short iFrame permission code change by their dev team. Flag before scoping the test.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is assignment recording critical to your first use case, or could it be excluded from the initial test scope?"</em></div></div>
         </div>
       </div>
       <div class="risk-card risk" id="rc-C1-offline">
-        <div class="rc-header"><span class="rc-badge">Not supported</span><span class="rc-title">Offline download not available on hybrid or native apps</span></div>
+        <div class="rc-header"><span class="rc-badge">Not supported</span><span class="rc-title">Offline download not available on hybrid or native mobile apps</span></div>
         <div class="rc-rows">
           <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Video and audio file downloads are blocked on hybrid and native mobile apps. Content can be streamed but not downloaded for offline use.</div></div>
           <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"Offline download is not supported in the embedded experience on mobile apps. Streaming works fine — but if offline download is a hard requirement, we need to discuss alternatives."</em></div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is offline download a hard requirement, or is it a nice-to-have? Most learners with a mobile connection find streaming acceptable."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is offline download a hard requirement or a nice-to-have? Most learners with mobile connectivity find streaming completely acceptable."</em></div></div>
         </div>
       </div>
     </div>
 
     <div class="q-group" id="grp-C2">
       <div class="q-title">Are they embedding full courses or specific modules only?</div>
-      <div class="q-hint">LUA is built for learner experience — it supports full courses. Module-only embedding is not supported.</div>
+      <div class="q-hint">LUA is built for full learner experience — it supports full courses. Module-only embedding is not supported.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('C2','courses','green',this)"><div class="opt-icon">📚</div><div><div class="opt-label">Full courses</div><div class="opt-sub">Complete learning journeys embedded in the experience</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C2','modules','red',this)"><div class="opt-icon">🧩</div><div><div class="opt-label">Specific modules only — e.g. just one exam or one video</div><div class="opt-sub">They want to embed a single module, not a full course</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('C2','both','amber',this)"><div class="opt-icon">⚡</div><div><div class="opt-label">Mix of both — not yet decided</div><div class="opt-sub">Still defining the content scope</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('C2','courses','green',this)"><div class="opt-icon">📚</div><div class="opt-content"><div class="opt-label">Full courses</div><div class="opt-sub">Complete learning journeys embedded in the experience</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C2','modules','red',this)"><div class="opt-icon">🧩</div><div class="opt-content"><div class="opt-label">Specific modules only — e.g. just one exam or one video</div><div class="opt-sub">They want to embed a single module, not a full course</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('C2','both','amber',this)"><div class="opt-icon">⚡</div><div class="opt-content"><div class="opt-label">Mix of both — not yet decided</div><div class="opt-sub">Still defining the content scope</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-C2-modules">
         <div class="rc-header"><span class="rc-badge">Limitation</span><span class="rc-title">Module-only embedding is not supported in LUA</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">LearnUpon Anywhere is built for learner experience and supports full courses only. Individual module-only embedding is not available.</div></div>
-          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"LUA embeds at the course level — so the learner accesses a full course within your platform. If you need a single standalone module, we would need to wrap it in a course first."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">LearnUpon Anywhere supports full courses only. Individual module-only embedding is not available.</div></div>
+          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"LUA embeds at the course level. If you need a single standalone module, we would wrap it in a short course first — which is a quick admin step."</em></div></div>
           <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Would wrapping the content in a short course work for your use case, or is standalone module access a hard requirement?"</em></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- GROUP D: Technical Setup -->
+  <!-- D: TECHNICAL -->
   <div class="section-wrap">
     <div class="section-label">D — Technical Setup</div>
 
     <div class="q-group" id="grp-D1">
       <div class="q-title">Do they have Single Sign-On (SSO) configured?</div>
-      <div class="q-hint">SSO determines how seamless the learner experience will be. No SSO means friction and a longer test setup. SAML and SQSSO are both supported.</div>
+      <div class="q-hint">SSO determines how seamless the learner experience will be. SAML and SQSSO are both supported by LearnUpon.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('D1','yes','green',this)"><div class="opt-icon">✅</div><div><div class="opt-label">Yes — SSO already configured (SAML or SQSSO)</div><div class="opt-sub">Learners will authenticate seamlessly</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D1','partial','amber',this)"><div class="opt-icon">⚡</div><div><div class="opt-label">Partial — SSO exists but not validated against LearnUpon</div><div class="opt-sub">They have an IDP but it has not been tested with LU</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D1','no','red',this)"><div class="opt-icon">❌</div><div><div class="opt-label">No SSO — username and password only</div><div class="opt-sub">No IDP in place</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D1','cookieless','amber',this)"><div class="opt-icon">🔒</div><div><div class="opt-label">Cookieless authentication</div><div class="opt-sub">They use a cookieless implementation — check IDP compatibility</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D1','unknown','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to ask on the call</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('D1','yes','green',this)"><div class="opt-icon">✅</div><div class="opt-content"><div class="opt-label">Yes — SSO configured (SAML or SQSSO)</div><div class="opt-sub">Learners will authenticate seamlessly</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D1','partial','amber',this)"><div class="opt-icon">⚡</div><div class="opt-content"><div class="opt-label">Partial — SSO exists but not validated against LearnUpon</div><div class="opt-sub">They have an IDP but it has not been tested with LU</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D1','no','red',this)"><div class="opt-icon">❌</div><div class="opt-content"><div class="opt-label">No SSO — username and password only</div><div class="opt-sub">No IDP in place at all</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D1','cookieless','amber',this)"><div class="opt-icon">🔒</div><div class="opt-content"><div class="opt-label">Cookieless authentication</div><div class="opt-sub">Check IDP compatibility — SAML + cookieless can break on some IDPs</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D1','unknown','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to ask their technical contact</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-D1-no">
-        <div class="rc-header"><span class="rc-badge">Blocker</span><span class="rc-title">No SSO — test setup will be significantly longer</span></div>
+        <div class="rc-header"><span class="rc-badge">Blocker</span><span class="rc-title">No SSO — test setup will be significantly more complex</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Without SSO, learners cannot access the embedded experience seamlessly. The test can still be done but the setup is more complex and the learner experience will have friction.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is SSO on your roadmap? Even a basic SQSSO implementation would significantly simplify the test setup and the final learner experience."</em></div></div>
-          <div class="rc-row"><div class="rc-key">Note</div><div class="rc-val">SQSSO is the simplest option — it can be set up quickly without a full IDP. Worth introducing this as the path of least resistance.</div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Without SSO, learners cannot access the embedded experience seamlessly. The test can still run but setup is more complex and the learner experience will have friction.</div></div>
+          <div class="rc-row"><div class="rc-key">Introduce</div><div class="rc-val">SQSSO is the simplest option — no full IDP required. Can be set up quickly. Worth presenting this as the path of least resistance.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is SSO on your roadmap? Even a basic SQSSO implementation would significantly simplify both the test setup and the final learner experience."</em></div></div>
         </div>
         <div class="disc-block show">
-          <div class="disc-label">Further discovery</div>
+          <div class="disc-label">Further discovery to ask</div>
           <div class="disc-q">"How do your users currently log in to the platform where learning will appear?"</div>
-          <div class="disc-q">"Is there a plan to implement SSO in the near term? What IDP would you use?"</div>
-          <div class="disc-q">"Would SQSSO — a simpler LearnUpon-native SSO option — be acceptable as a starting point?"</div>
-        </div>
-      </div>
-      <div class="risk-card warn" id="rc-D1-cookieless">
-        <div class="rc-header"><span class="rc-badge">Technical check</span><span class="rc-title">Cookieless authentication — IDP compatibility must be confirmed</span></div>
-        <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Cookieless implementations are advised for embedded experiences, however SAML + Cookieless can break depending on the IDP provider.</div></div>
-          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Confirm IDP provider and test cookieless compatibility as part of the technical validation call before scoping the test.</div></div>
+          <div class="disc-q">"Is there a plan to implement SSO in the near term? Which IDP would you use?"</div>
+          <div class="disc-q">"Would SQSSO — LearnUpon's own simpler SSO option — be acceptable as a starting point?"</div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-D1-partial">
         <div class="rc-header"><span class="rc-badge">Validate</span><span class="rc-title">SSO exists but needs validation against LearnUpon</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Schedule a 30-minute technical call with their IT contact to validate the SSO connection before the test starts. This is a quick step but cannot be skipped.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Which IDP provider are you using — Okta, Azure AD, Google, or something else? And is it SAML-based?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Schedule a 30-minute technical call with their IT contact to validate the SSO connection before the test starts.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Which IDP are you using — Okta, Azure AD, Google? Is it SAML-based?"</em></div></div>
+        </div>
+      </div>
+      <div class="risk-card warn" id="rc-D1-cookieless">
+        <div class="rc-header"><span class="rc-badge">Technical check</span><span class="rc-title">Cookieless auth — IDP compatibility must be confirmed</span></div>
+        <div class="rc-rows">
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">SAML + Cookieless can break depending on the IDP provider. Test compatibility as part of the technical validation call before scoping.</div></div>
         </div>
       </div>
     </div>
@@ -493,84 +550,97 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="q-title">Do they have development resource available?</div>
       <div class="q-hint">No dev resource means Grab &amp; Go is the only viable option. Scoping a Custom iFrame without a developer is the most common mistake in Anywhere deals.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('D2','yes','green',this)"><div class="opt-icon">👩‍💻</div><div><div class="opt-label">Yes — dedicated dev team available</div><div class="opt-sub">Engineers who can own the iFrame build and test</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D2','limited','amber',this)"><div class="opt-icon">⚡</div><div><div class="opt-label">Limited — dev resource exists but is backlogged</div><div class="opt-sub">Engineers are available but capacity is uncertain</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D2','no','red',this)"><div class="opt-icon">🚫</div><div><div class="opt-label">No dev resource available</div><div class="opt-sub">Non-technical team — no one to build the integration</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('D2','unknown','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to identify a technical contact</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('D2','yes','green',this)"><div class="opt-icon">👩‍💻</div><div class="opt-content"><div class="opt-label">Yes — dedicated dev team available</div><div class="opt-sub">Engineers who can own the iFrame build and test</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D2','limited','amber',this)"><div class="opt-icon">⚡</div><div class="opt-content"><div class="opt-label">Limited — dev resource exists but is backlogged</div><div class="opt-sub">Engineers available but capacity is uncertain</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D2','no','red',this)"><div class="opt-icon">🚫</div><div class="opt-content"><div class="opt-label">No dev resource available</div><div class="opt-sub">Non-technical team — no one to build the integration</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('D2','unknown','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to identify a technical contact</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card risk" id="rc-D2-no">
         <div class="rc-header"><span class="rc-badge">Scope change</span><span class="rc-title">No dev resource — redirect to Grab &amp; Go immediately</span></div>
         <div class="rc-rows">
           <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Do not scope a Custom iFrame deal. Grab &amp; Go is the only realistic option — LearnUpon provides a code snippet, no development required.</div></div>
-          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"If you do not have dev resource right now, we have a Grab &amp; Go option — LearnUpon provides a code snippet you paste into any page. It is the fastest way to get started without engineering involvement."</em></div></div>
-          <div class="rc-row"><div class="rc-key">Note</div><div class="rc-val">Grab &amp; Go is static content — no personalisation or dynamic user data. Set that expectation clearly.</div></div>
+          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"If you do not have dev resource right now, we have a Grab &amp; Go option — LearnUpon provides a code snippet you paste into any page. Fastest way to get started with zero engineering involvement."</em></div></div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-D2-limited">
-        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Limited dev resource — name a technical contact before scoping</span></div>
+        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">Limited dev resource — get a named contact before leaving this call</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Without a named technical owner, the test will stall when it reaches the integration phase.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Who specifically from your technical team would own the integration side? Even part-time — I need a name before we set a test start date."</em></div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What is their current backlog situation? Can we get two to three days of their time in the next two weeks?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Who specifically from your technical team would own the integration side — even part-time? I need a name before we set a test start date."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Can we get two to three days of their time in the next two weeks for the initial setup?"</em></div></div>
         </div>
       </div>
       <div class="risk-card warn" id="rc-D2-unknown">
-        <div class="rc-header"><span class="rc-badge">Must confirm</span><span class="rc-title">Technical contact not identified — get a name before you leave the call</span></div>
+        <div class="rc-header"><span class="rc-badge">Must confirm</span><span class="rc-title">Technical contact not identified — get a name on this call</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Ask on call</div><div class="rc-val"><em>"Who from your technical team would own the integration side of the test? I need to send them the Getting Started documentation directly."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Who from your technical team would own the integration side of the test? I need to send them the Getting Started documentation directly."</em></div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- GROUP E: Experience and Priority -->
+  <!-- E: EXPERIENCE -->
   <div class="section-wrap">
     <div class="section-label">E — Experience and Readiness</div>
 
     <div class="q-group" id="grp-E1">
-      <div class="q-title">How do users currently log in to the platform where Anywhere will appear?</div>
-      <div class="q-hint">Authentication method determines the SSO approach and iFrame configuration needed.</div>
+      <div class="q-title">How do users currently authenticate into the platform where Anywhere will appear?</div>
+      <div class="q-hint">Authentication method determines the SSO approach and iFrame configuration needed for the test.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('E1','saml','green',this)"><div class="opt-icon">🔐</div><div><div class="opt-label">SAML SSO via an IDP (Okta, Azure AD, Google)</div><div class="opt-sub">Standard enterprise SSO — works cleanly with LUA</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E1','sqsso','green',this)"><div class="opt-icon">🔑</div><div><div class="opt-label">SQSSO or custom token-based authentication</div><div class="opt-sub">LearnUpon's own SSO method — simplest implementation</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E1','password','amber',this)"><div class="opt-icon">🔒</div><div><div class="opt-label">Username and password only</div><div class="opt-sub">No SSO in place — will need to be set up for LUA</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E1','oauth','amber',this)"><div class="opt-icon">🌐</div><div><div class="opt-label">OAuth or social login (Google, LinkedIn)</div><div class="opt-sub">May need additional configuration to work with LUA</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E1','unknown','amber',this)"><div class="opt-icon">❓</div><div><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to ask their technical contact</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('E1','saml','green',this)"><div class="opt-icon">🔐</div><div class="opt-content"><div class="opt-label">SAML SSO via an IDP — Okta, Azure AD, Google</div><div class="opt-sub">Standard enterprise SSO — works cleanly with LUA</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E1','sqsso','green',this)"><div class="opt-icon">🔑</div><div class="opt-content"><div class="opt-label">SQSSO or custom token-based authentication</div><div class="opt-sub">LearnUpon's own SSO — simplest implementation</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E1','password','amber',this)"><div class="opt-icon">🔒</div><div class="opt-content"><div class="opt-label">Username and password only</div><div class="opt-sub">No SSO — will need to be configured for LUA</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E1','oauth','amber',this)"><div class="opt-icon">🌐</div><div class="opt-content"><div class="opt-label">OAuth or social login — Google, LinkedIn</div><div class="opt-sub">May need additional configuration to work with LUA</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E1','unknown','amber',this)"><div class="opt-icon">❓</div><div class="opt-content"><div class="opt-label">Not confirmed yet</div><div class="opt-sub">Need to ask their technical contact</div></div><div class="opt-radio"></div></button>
       </div>
       <div class="risk-card warn" id="rc-E1-password">
-        <div class="rc-header"><span class="rc-badge">Setup needed</span><span class="rc-title">No SSO — SQSSO setup required before test</span></div>
+        <div class="rc-header"><span class="rc-badge">Setup needed</span><span class="rc-title">No SSO — SQSSO setup required before test can begin</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Introduce SQSSO as a quick, low-friction path to getting SSO in place. It does not require a full IDP setup and can be implemented quickly by their dev team.</div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"We can use SQSSO to get authentication working quickly. Does your team have the ability to generate a token server-side? It is a short implementation."</em></div></div>
+          <div class="rc-row"><div class="rc-key">Action</div><div class="rc-val">Introduce SQSSO as a quick, low-friction path. Does not require a full IDP setup and can be implemented quickly.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Does your team have the ability to generate a token server-side? SQSSO is a short implementation that would get authentication working quickly."</em></div></div>
         </div>
       </div>
     </div>
 
     <div class="q-group" id="grp-E2">
-      <div class="q-title">How quickly are they looking to move?</div>
-      <div class="q-hint">Urgency signals deal readiness. A prospect who asks "how fast can we test?" is your strongest buying signal.</div>
+      <div class="q-title">Has a technical contact been identified on their side?</div>
+      <div class="q-hint">Without a named technical owner, the test will stall the moment it reaches the integration phase. This is an SE blocker — not an AE one.</div>
       <div class="opt-grid">
-        <button class="opt" onclick="pick('E2','now','green',this)"><div class="opt-icon">🚀</div><div><div class="opt-label">Immediately — they are ready to start a test now</div><div class="opt-sub">"How fast can we test this?" — strongest buying signal</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E2','quarter','green',this)"><div class="opt-icon">📅</div><div><div class="opt-label">This quarter — defined timeline</div><div class="opt-sub">Clear intention to move forward within the next 3 months</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E2','exploring','amber',this)"><div class="opt-icon">🔍</div><div><div class="opt-label">Exploring — no defined timeline yet</div><div class="opt-sub">Gathering information, no committed decision date</div></div><div class="opt-dot"></div></button>
-        <button class="opt" onclick="pick('E2','budget','red',this)"><div class="opt-icon">💰</div><div><div class="opt-label">Budget or approval not yet confirmed</div><div class="opt-sub">Internal sign-off still needed before they can proceed</div></div><div class="opt-dot"></div></button>
+        <button class="opt" onclick="pick('E2','named','green',this)"><div class="opt-icon">✅</div><div class="opt-content"><div class="opt-label">Yes — named technical contact confirmed</div><div class="opt-sub">A specific engineer or IT contact has been identified</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E2','team','amber',this)"><div class="opt-icon">👥</div><div class="opt-content"><div class="opt-label">Team identified but no named individual yet</div><div class="opt-sub">They have a dev or IT team but no specific owner assigned</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E2','none','red',this)"><div class="opt-icon">🚫</div><div class="opt-content"><div class="opt-label">No technical contact identified at all</div><div class="opt-sub">The business stakeholder cannot name anyone technical</div></div><div class="opt-radio"></div></button>
+        <button class="opt" onclick="pick('E2','external','amber',this)"><div class="opt-icon">🔧</div><div class="opt-content"><div class="opt-label">External agency or contractor would own it</div><div class="opt-sub">Implementation would be done by a third party</div></div><div class="opt-radio"></div></button>
       </div>
-      <div class="risk-card warn" id="rc-E2-exploring">
-        <div class="rc-header"><span class="rc-badge">Qualify further</span><span class="rc-title">No defined timeline — help them find a reason to move</span></div>
+      <div class="risk-card ok" id="rc-E2-named">
+        <div class="rc-header"><span class="rc-badge">Ready to proceed</span><span class="rc-title">Technical contact confirmed — send Getting Started docs today</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is there a business event — a product launch, a compliance deadline, a seasonal hire cycle — that would create urgency around getting this in place?"</em></div></div>
-          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"What would need to happen internally for this to become a Q[current] priority?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Do this</div><div class="rc-val">Send the Getting Started documentation directly to the named technical contact today. Do not let this wait — the test starts from the moment they receive it.</div></div>
+          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"I will send the Getting Started guide directly to [name] today. It covers API authentication, SSO configuration, and the iFrame code examples. Typical setup time is one to two days."</em></div></div>
         </div>
       </div>
-      <div class="risk-card ok" id="rc-E2-now">
-        <div class="rc-header"><span class="rc-badge">Move fast</span><span class="rc-title">Ready to test — propose the test window on this call</span></div>
+      <div class="risk-card warn" id="rc-E2-team">
+        <div class="rc-header"><span class="rc-badge">Get a name</span><span class="rc-title">Team identified but no owner — get a specific name before you hang up</span></div>
         <div class="rc-rows">
-          <div class="rc-row"><div class="rc-key">Do this</div><div class="rc-val">Propose a 1-2 week test window before the call ends. One embedded course in their environment. Name a start date. Get it in the diary.</div></div>
-          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"Let us agree a test start date today. One course in your environment — 1 to 2 weeks. Once you confirm it works, we move to commercial. What date works for your technical team?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">Sending Getting Started docs to a team inbox means no one owns it. The test stalls with no one accountable.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Who specifically within the team would own this — even part-time? I need a direct contact to send the technical documentation to."</em></div></div>
+        </div>
+      </div>
+      <div class="risk-card risk" id="rc-E2-none">
+        <div class="rc-header"><span class="rc-badge">Blocker</span><span class="rc-title">No technical contact — test cannot be scoped without one</span></div>
+        <div class="rc-rows">
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">This is a hard blocker for the test. The integration requires someone who can configure SSO, set CSP headers, and build or configure the iFrame. Without a named owner, the deal will not progress past this point.</div></div>
+          <div class="rc-row"><div class="rc-key">Say this</div><div class="rc-val"><em>"To move forward with a test, I need a technical resource on your side — even a few days of their time. Who in your organisation manages your platform integrations or API connections?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is there an IT team, a CTO, or an external agency who owns your platform technically? They would be my contact for the Getting Started documentation."</em></div></div>
+        </div>
+      </div>
+      <div class="risk-card warn" id="rc-E2-external">
+        <div class="rc-header"><span class="rc-badge">Confirm capacity</span><span class="rc-title">External agency — confirm availability and access before scoping the test</span></div>
+        <div class="rc-rows">
+          <div class="rc-row"><div class="rc-key">Risk</div><div class="rc-val">External agencies add a dependency on their availability and their access to the prospect's platform. This can significantly extend the test timeline.</div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Does the agency have access to your platform environment? And do they have availability in the next two to three weeks to work on this?"</em></div></div>
+          <div class="rc-row"><div class="rc-key">Ask</div><div class="rc-val"><em>"Is there a direct technical contact at the agency I can send the Getting Started documentation to?"</em></div></div>
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- GENERATE -->
@@ -584,15 +654,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <!-- RESULT -->
   <div class="result-wrap" id="result-wrap"></div>
 
-  </div><!-- q-screen -->
-</div><!-- left -->
+  </div>
+</div>
 
 <!-- RIGHT PANEL -->
 <div class="right">
   <div class="panel-title">Live Deal Signal</div>
 
-  <div class="live-score">
-    <div class="ls-light" id="ls-light">—</div>
+  <div class="live-score" id="live-score">
+    <div class="ls-emoji" id="ls-emoji">—</div>
     <div class="ls-verdict" id="ls-verdict">Answer questions to qualify</div>
     <div class="ls-sub" id="ls-sub">AWAITING INPUT</div>
     <div class="score-pills" id="score-pills"></div>
@@ -600,307 +670,209 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
   <div class="escalate-box" id="escalate-box">
     <div class="esc-title">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Flag to manager
     </div>
     <div id="escalate-items"></div>
   </div>
 
   <div class="brief-section">
-    <div class="brief-title">Prospect Brief</div>
+    <div class="brief-title-row">Prospect Brief</div>
     <div class="brief-row"><div class="bk">Location</div><div class="bv empty" id="b-location">—</div></div>
     <div class="brief-row"><div class="bk">Audience</div><div class="bv empty" id="b-audience">—</div></div>
     <div class="brief-row"><div class="bk">MVP goal</div><div class="bv empty" id="b-mvp">—</div></div>
     <div class="brief-row"><div class="bk">App type</div><div class="bv empty" id="b-app">—</div></div>
-    <div class="brief-row"><div class="bk">Mobile priority</div><div class="bv empty" id="b-mobile">—</div></div>
+    <div class="brief-row"><div class="bk">Mobile</div><div class="bv empty" id="b-mobile">—</div></div>
     <div class="brief-row"><div class="bk">Content</div><div class="bv empty" id="b-content">—</div></div>
     <div class="brief-row"><div class="bk">Scope</div><div class="bv empty" id="b-scope">—</div></div>
     <div class="brief-row"><div class="bk">SSO</div><div class="bv empty" id="b-sso">—</div></div>
     <div class="brief-row"><div class="bk">Dev resource</div><div class="bv empty" id="b-dev">—</div></div>
     <div class="brief-row"><div class="bk">Auth method</div><div class="bv empty" id="b-auth">—</div></div>
-    <div class="brief-row"><div class="bk">Urgency</div><div class="bv empty" id="b-urgency">—</div></div>
+    <div class="brief-row"><div class="bk">Tech contact</div><div class="bv empty" id="b-urgency">—</div></div>
     <div class="brief-row"><div class="bk">LUA option</div><div class="bv empty" id="b-option">—</div></div>
   </div>
 </div>
 
-</div><!-- app -->
+</div>
 
 <script>
 const state = {};
-
 const briefMap = {
-  A1: { id:'b-location', map:{ crm:'CRM (Salesforce/HubSpot)', portal:'Partner or customer portal', mobile:'Inside mobile app', product:'Inside SaaS product', intranet:'Company intranet', unknown:'Not confirmed' } },
-  A2: { id:'b-audience', map:{ frontline:'Frontline / field workforce', customer:'External customers', partner:'Partners / channel', employee:'Internal employees' } },
-  A3: { id:'b-mvp', map:{ clear:'Defined ✓', partial:'Partially defined', none:'Not yet defined' } },
-  B1: { id:'b-app', map:{ browser:'Desktop/mobile browser ✓', hybrid:'Hybrid/wrapper app ⚡', native:'Fully native ⚠', unknown:'Not confirmed' } },
-  B2: { id:'b-mobile', map:{ critical:'Critical 🔴', important:'Important 🟡', low:'Low 🟢' } },
-  C1: { id:'b-content', map:{ simple:'Standard (text, video streaming) ✓', scorm_direct:'SCORM direct upload ✓', scorm_dispatch:'SCORM dispatched ⚠', assignment:'Assignment recording ⚠', offline:'Offline download required ⚠' } },
-  C2: { id:'b-scope', map:{ courses:'Full courses ✓', modules:'Modules only ⚠', both:'Mix — TBC' } },
-  D1: { id:'b-sso', map:{ yes:'Configured ✓', partial:'Partial — needs validation ⚡', no:'Not in place ⚠', cookieless:'Cookieless — check IDP ⚡', unknown:'Not confirmed' } },
-  D2: { id:'b-dev', map:{ yes:'Available ✓', limited:'Limited / backlogged ⚡', no:'Not available ⚠', unknown:'Not confirmed' } },
-  E1: { id:'b-auth', map:{ saml:'SAML SSO ✓', sqsso:'SQSSO ✓', password:'Username/password ⚠', oauth:'OAuth — check config ⚡', unknown:'Not confirmed' } },
-  E2: { id:'b-urgency', map:{ now:'Ready to test now 🚀', quarter:'This quarter', exploring:'Exploring — no timeline', budget:'Budget not confirmed ⚠' } },
+  A1:{id:'b-location',map:{crm:'CRM (Salesforce/HubSpot)',portal:'Partner/customer portal',mobile:'Inside mobile app',product:'Inside SaaS product',intranet:'Company intranet',unknown:'Not confirmed'}},
+  A2:{id:'b-audience',map:{frontline:'Frontline/field workforce',customer:'External customers',partner:'Partners/channel',employee:'Internal employees'}},
+  A3:{id:'b-mvp',map:{clear:'Defined ✓',partial:'Partially defined',none:'Not yet defined'}},
+  B1:{id:'b-app',map:{browser:'Desktop/mobile browser ✓',hybrid:'Hybrid/wrapper app ⚡',native:'Fully native ⚠',unknown:'Not confirmed'}},
+  B2:{id:'b-mobile',map:{critical:'Critical 🔴',important:'Important 🟡',low:'Low 🟢'}},
+  C1:{id:'b-content',map:{simple:'Standard content ✓',scorm_direct:'SCORM direct upload ✓',scorm_dispatch:'SCORM dispatched ⚠',assignment:'Assignment recording ⚠',offline:'Offline download ⚠'}},
+  C2:{id:'b-scope',map:{courses:'Full courses ✓',modules:'Modules only ⚠',both:'Mix — TBC'}},
+  D1:{id:'b-sso',map:{yes:'Configured ✓',partial:'Partial — needs validation',no:'Not in place ⚠',cookieless:'Cookieless — check IDP',unknown:'Not confirmed'}},
+  D2:{id:'b-dev',map:{yes:'Available ✓',limited:'Limited/backlogged ⚡',no:'Not available ⚠',unknown:'Not confirmed'}},
+  E1:{id:'b-auth',map:{saml:'SAML SSO ✓',sqsso:'SQSSO ✓',password:'Username/password ⚠',oauth:'OAuth — check config',unknown:'Not confirmed'}},
+  E2:{id:'b-urgency',map:{named:'Named contact confirmed ✓',team:'Team identified — no owner yet ⚡',none:'No technical contact ⚠',external:'External agency — confirm capacity ⚡'}},
 };
-
-const signalMap = {
-  A1:{ crm:'green', portal:'green', mobile:'amber', product:'green', intranet:'green', unknown:'amber' },
-  A2:{ frontline:'green', customer:'green', partner:'green', employee:'amber' },
-  A3:{ clear:'green', partial:'amber', none:'amber' },
-  B1:{ browser:'green', hybrid:'amber', native:'red', unknown:'amber' },
-  B2:{ critical:'red', important:'amber', low:'green' },
-  C1:{ simple:'green', scorm_direct:'green', scorm_dispatch:'red', assignment:'red', offline:'red' },
-  C2:{ courses:'green', modules:'red', both:'amber' },
-  D1:{ yes:'green', partial:'amber', no:'red', cookieless:'amber', unknown:'amber' },
-  D2:{ yes:'green', limited:'amber', no:'red', unknown:'amber' },
-  E1:{ saml:'green', sqsso:'green', password:'amber', oauth:'amber', unknown:'amber' },
-  E2:{ now:'green', quarter:'green', exploring:'amber', budget:'red' },
-};
-
-// Risk cards to show per answer
 const riskCards = {
-  A1:{ mobile:'rc-A1-mobile', crm:'rc-A1-crm', portal:null, product:null, intranet:null, unknown:null },
-  A2:{ frontline:'rc-A2-frontline', employee:'rc-A2-employee', customer:null, partner:null },
-  A3:{ partial:'rc-A3-partial', none:'rc-A3-partial', clear:null },
-  B1:{ native:'rc-B1-native', hybrid:'rc-B1-hybrid', unknown:'rc-B1-unknown', browser:'rc-B1-browser' },
-  B2:{ critical:'rc-B2-critical', important:null, low:null },
-  C1:{ scorm_dispatch:'rc-C1-scorm_dispatch', assignment:'rc-C1-assignment', offline:'rc-C1-offline', simple:null, scorm_direct:null },
-  C2:{ modules:'rc-C2-modules', courses:null, both:null },
-  D1:{ no:'rc-D1-no', cookieless:'rc-D1-cookieless', partial:'rc-D1-partial', yes:null, unknown:null },
-  D2:{ no:'rc-D2-no', limited:'rc-D2-limited', unknown:'rc-D2-unknown', yes:null },
-  E1:{ password:'rc-E1-password', saml:null, sqsso:null, oauth:null, unknown:null },
-  E2:{ exploring:'rc-E2-exploring', budget:null, now:'rc-E2-now', quarter:null },
+  A1:{mobile:'rc-A1-mobile',crm:'rc-A1-crm',portal:null,product:null,intranet:null,unknown:null},
+  A2:{frontline:'rc-A2-frontline',employee:'rc-A2-employee',customer:null,partner:null},
+  A3:{partial:'rc-A3-partial',none:'rc-A3-partial',clear:null},
+  B1:{native:'rc-B1-native',hybrid:'rc-B1-hybrid',unknown:'rc-B1-unknown',browser:'rc-B1-browser'},
+  B2:{critical:'rc-B2-critical',important:null,low:null},
+  C1:{scorm_dispatch:'rc-C1-scorm_dispatch',assignment:'rc-C1-assignment',offline:'rc-C1-offline',simple:null,scorm_direct:null},
+  C2:{modules:'rc-C2-modules',courses:null,both:null},
+  D1:{no:'rc-D1-no',cookieless:'rc-D1-cookieless',partial:'rc-D1-partial',yes:null,unknown:null},
+  D2:{no:'rc-D2-no',limited:'rc-D2-limited',unknown:'rc-D2-unknown',yes:null},
+  E1:{password:'rc-E1-password',saml:null,sqsso:null,oauth:null,unknown:null},
+  E2:{named:'rc-E2-named',team:'rc-E2-team',none:'rc-E2-none',external:'rc-E2-external'},
 };
 
-function startTool() {
-  document.getElementById('intro-screen').style.display = 'none';
-  document.getElementById('q-screen').style.display = 'block';
+function startTool(){
+  document.getElementById('intro-screen').style.display='none';
+  document.getElementById('q-screen').style.display='block';
 }
 
-function pick(qId, value, signal, el) {
-  // Deselect all in group
-  el.closest('.opt-grid').querySelectorAll('.opt').forEach(o => {
-    o.className = 'opt';
-  });
-  // Select this one
-  el.className = 'opt sel-' + signal;
-  state[qId] = { value, signal };
-
-  // Hide all risk cards for this question
-  const cards = riskCards[qId];
-  if (cards) {
-    Object.values(cards).forEach(id => { if (id) { const el = document.getElementById(id); if (el) el.classList.remove('show'); } });
-    // Show relevant card
-    const toShow = cards[value];
-    if (toShow) { const rc = document.getElementById(toShow); if (rc) rc.classList.add('show'); }
+function pick(qId,value,signal,el){
+  el.closest('.opt-grid').querySelectorAll('.opt').forEach(o=>{o.className='opt';});
+  el.className='opt sel-'+signal;
+  state[qId]={value,signal};
+  const cards=riskCards[qId];
+  if(cards){
+    Object.values(cards).forEach(id=>{if(id){const e=document.getElementById(id);if(e)e.classList.remove('show');}});
+    const toShow=cards[value];
+    if(toShow){const rc=document.getElementById(toShow);if(rc)rc.classList.add('show');}
   }
-
-  // Update brief
-  const bm = briefMap[qId];
-  if (bm) {
-    const el2 = document.getElementById(bm.id);
-    if (el2) {
-      const txt = bm.map[value] || value;
-      el2.textContent = txt;
-      el2.className = 'bv ' + signal;
-    }
+  const bm=briefMap[qId];
+  if(bm){
+    const el2=document.getElementById(bm.id);
+    if(el2){el2.textContent=bm.map[value]||value;el2.className='bv '+signal;}
   }
-
-  // Update LUA option
-  updateOption();
-  updateScore();
-  updateEscalation();
-  checkGenReady();
+  updateOption();updateScore();updateEscalation();checkReady();
 }
 
-function updateOption() {
-  const el = document.getElementById('b-option');
-  if (!el) return;
-  const dev = state.D2?.value;
-  if (dev === 'no') { el.textContent = 'Grab & Go (no dev available)'; el.className = 'bv amber'; }
-  else if (dev === 'yes') { el.textContent = 'Custom iFrame ✓'; el.className = 'bv green'; }
-  else if (dev === 'limited') { el.textContent = 'Custom iFrame (confirm capacity)'; el.className = 'bv amber'; }
-  else { el.textContent = '—'; el.className = 'bv empty'; }
+function updateOption(){
+  const el=document.getElementById('b-option');
+  if(!el)return;
+  const dev=state.D2?.value;
+  if(dev==='no'){el.textContent='Grab & Go only ⚠';el.className='bv amber';}
+  else if(dev==='yes'){el.textContent='Custom iFrame ✓';el.className='bv green';}
+  else if(dev==='limited'){el.textContent='Custom iFrame (confirm capacity)';el.className='bv amber';}
+  else{el.textContent='—';el.className='bv empty';}
 }
 
-function updateScore() {
-  const signals = Object.values(state).map(s => s.signal);
-  const reds = signals.filter(s => s === 'red').length;
-  const ambers = signals.filter(s => s === 'amber').length;
-  const greens = signals.filter(s => s === 'green').length;
-  const total = signals.length;
-
-  let verdict, cls, icon, sub;
-  if (total === 0) { verdict = 'Answer questions to qualify'; cls = ''; icon = '—'; sub = 'AWAITING INPUT'; }
-  else if (reds >= 2) { verdict = 'Scope carefully'; cls = 'red'; icon = '🔴'; sub = 'HIGH RISK — VALIDATE BEFORE DEMO'; }
-  else if (reds === 1 || ambers >= 3) { verdict = 'Proceed with caution'; cls = 'amber'; icon = '🟡'; sub = 'AMBER — QUALIFY FURTHER FIRST'; }
-  else if (greens >= Math.floor(total * 0.7)) { verdict = 'Strong fit — lean in'; cls = 'green'; icon = '🟢'; sub = 'GREEN — MOVE TO TEST CONVERSATION'; }
-  else { verdict = 'Looks promising'; cls = 'amber'; icon = '🟡'; sub = 'CONTINUE QUALIFYING'; }
-
-  document.getElementById('ls-light').textContent = icon;
-  document.getElementById('ls-light').className = 'ls-light ' + cls;
-  document.getElementById('ls-verdict').textContent = verdict;
-  document.getElementById('ls-sub').textContent = sub;
-  document.getElementById('hdr-light').className = 'score-light ' + cls;
-  document.getElementById('hdr-verdict').textContent = verdict;
-
-  const pillsEl = document.getElementById('score-pills');
-  let ph = '';
-  if (reds > 0) ph += `<span class="sp sp-red">⚠ ${reds} risk${reds>1?'s':''}</span>`;
-  if (ambers > 0) ph += `<span class="sp sp-amber">⚡ ${ambers} to qualify</span>`;
-  if (greens > 0) ph += `<span class="sp sp-green">✓ ${greens} confirmed</span>`;
-  pillsEl.innerHTML = ph;
+function updateScore(){
+  const signals=Object.values(state).map(s=>s.signal);
+  const reds=signals.filter(s=>s==='red').length;
+  const ambers=signals.filter(s=>s==='amber').length;
+  const greens=signals.filter(s=>s==='green').length;
+  const total=signals.length;
+  let verdict,cls,emoji,sub;
+  if(total===0){verdict='Answer questions to qualify';cls='';emoji='—';sub='AWAITING INPUT';}
+  else if(reds>=2){verdict='Scope carefully before progressing';cls='red';emoji='🔴';sub='HIGH RISK — VALIDATE BEFORE DEMO';}
+  else if(reds===1||ambers>=3){verdict='Proceed with targeted questions';cls='amber';emoji='🟡';sub='AMBER — QUALIFY FURTHER FIRST';}
+  else if(greens>=Math.floor(total*.65)){verdict='Strong fit — move to test conversation';cls='green';emoji='🟢';sub='GREEN — LEAN IN';}
+  else{verdict='Looking promising';cls='amber';emoji='🟡';sub='CONTINUE QUALIFYING';}
+  const ls=document.getElementById('live-score');
+  ls.className='live-score '+cls;
+  document.getElementById('ls-emoji').textContent=emoji;
+  document.getElementById('ls-verdict').textContent=verdict;
+  document.getElementById('ls-sub').textContent=sub;
+  const hd=document.getElementById('hdr-dot');
+  hd.className='hdr-dot '+cls;
+  document.getElementById('hdr-verdict').textContent=verdict;
+  let ph='';
+  if(reds>0)ph+=`<span class="sp sp-red">⚠ ${reds} risk${reds>1?'s':''}</span>`;
+  if(ambers>0)ph+=`<span class="sp sp-amber">⚡ ${ambers} to qualify</span>`;
+  if(greens>0)ph+=`<span class="sp sp-green">✓ ${greens} confirmed</span>`;
+  document.getElementById('score-pills').innerHTML=ph;
 }
 
-function updateEscalation() {
-  const flags = [];
-  if (state.B1?.value === 'native') flags.push('Native app architecture — Webview requirement must be confirmed by dev team before deal progresses');
-  if (state.B2?.value === 'critical' && state.B1?.value === 'native') flags.push('Mobile-critical deal with native app — high implementation risk, needs pre-sales review');
-  if (state.C1?.value === 'offline') flags.push('Offline download required — not supported on mobile, needs alternative solution discussion');
-  if (state.D2?.value === 'no' && state.B1?.value !== 'browser') flags.push('No dev resource on a non-browser deal — scope must change to Grab & Go before demo');
-  if (state.C1?.value === 'scorm_dispatch') flags.push('Dispatched SCORM in play — confirm content vault is enabled before test scoping');
-  if (state.E2?.value === 'budget') flags.push('Budget not confirmed — commercial stage may be premature');
-
-  const box = document.getElementById('escalate-box');
-  const items = document.getElementById('escalate-items');
-  if (flags.length > 0) {
-    box.classList.add('show');
-    items.innerHTML = flags.map(f => `<div class="esc-item">${f}</div>`).join('');
-  } else {
-    box.classList.remove('show');
-    items.innerHTML = '';
-  }
+function updateEscalation(){
+  const flags=[];
+  if(state.B1?.value==='native')flags.push('Native app — WebView requirement must be confirmed by dev team before deal progresses');
+  if(state.B2?.value==='critical'&&state.B1?.value==='native')flags.push('Mobile-critical + native app — high implementation risk, needs pre-sales review');
+  if(state.C1?.value==='offline')flags.push('Offline download required — not supported on mobile, alternative solution needed');
+  if(state.D2?.value==='no'&&state.B1?.value!=='browser')flags.push('No dev resource on a non-browser deal — must redirect to Grab & Go before demo');
+  if(state.C1?.value==='scorm_dispatch')flags.push('Dispatched SCORM — confirm Content Vault is enabled before test scoping');
+  if(state.E2?.value==='none')flags.push('No technical contact identified — test cannot be scoped until a named owner is confirmed on their side');
+  const box=document.getElementById('escalate-box');
+  const items=document.getElementById('escalate-items');
+  if(flags.length>0){box.classList.add('show');items.innerHTML=flags.map(f=>`<div class="esc-item">${f}</div>`).join('');}
+  else{box.classList.remove('show');items.innerHTML='';}
 }
 
-function checkGenReady() {
-  const answered = Object.keys(state).length;
-  const btn = document.getElementById('btn-gen');
-  if (answered >= 6) btn.classList.add('ready');
+function checkReady(){
+  const btn=document.getElementById('btn-gen');
+  if(Object.keys(state).length>=6)btn.classList.add('ready');
   else btn.classList.remove('ready');
 }
 
-function generateBrief() {
-  const signals = Object.values(state).map(s => s.signal);
-  const reds = signals.filter(s => s === 'red').length;
-  const ambers = signals.filter(s => s === 'amber').length;
-  const greens = signals.filter(s => s === 'green').length;
+function generateBrief(){
+  const signals=Object.values(state).map(s=>s.signal);
+  const reds=signals.filter(s=>s==='red').length;
+  const ambers=signals.filter(s=>s==='amber').length;
+  let tlClass,tlIcon,tlVerdict,tlSummary;
+  if(reds>=2){tlClass='red';tlIcon='🔴';tlVerdict='Scope carefully before progressing';tlSummary='This deal has multiple signals that require validation before it should progress. Review the risk flags and resolve them on the call before committing to a next step.';}
+  else if(reds===1||ambers>=3){tlClass='amber';tlIcon='🟡';tlVerdict='Proceed with targeted questions';tlSummary='There is genuine Anywhere potential here. One or more unknowns need resolving. Use the discovery questions below to qualify the remaining gaps before scoping the test.';}
+  else{tlClass='green';tlIcon='🟢';tlVerdict='Strong fit — move to test conversation';tlSummary='Signals are positive across the key dimensions. Move the conversation toward agreeing a 1-2 week test window on this call. Propose a start date before you hang up.';}
 
-  let tlClass, tlIcon, tlVerdict, tlSummary;
-  if (reds >= 2) {
-    tlClass = 'red'; tlIcon = '🔴';
-    tlVerdict = 'Scope carefully before progressing';
-    tlSummary = 'This deal has multiple signals that require validation before it should progress to demo or test. Review the risk flags below and resolve them on the call before committing to a next step.';
-  } else if (reds === 1 || ambers >= 3) {
-    tlClass = 'amber'; tlIcon = '🟡';
-    tlVerdict = 'Proceed with targeted questions';
-    tlSummary = 'There is genuine Anywhere potential here. One or more unknowns need resolving. Use the discovery questions below on the call to qualify the remaining gaps before scoping the test.';
-  } else {
-    tlClass = 'green'; tlIcon = '🟢';
-    tlVerdict = 'Strong fit — move to test conversation';
-    tlSummary = 'Signals are positive across the key dimensions. Move the conversation toward agreeing a 1-2 week test window on this call. Propose a start date before you hang up.';
-  }
+  const actions=[];
+  if(state.B1?.value==='unknown')actions.push('<strong>Confirm app architecture first.</strong> Ask: "How is your platform built — native, hybrid, or browser?" Do not scope anything mobile without this answer.');
+  if(state.B1?.value==='native')actions.push('<strong>Do not demo mobile Anywhere.</strong> Explain the WebView requirement. Ask if their dev team can explore WebView support. Offer mobile browser as interim.');
+  if(state.B1?.value==='hybrid')actions.push('<strong>Flag two hybrid limitations upfront:</strong> video/audio download blocked, assignment recording needs a code fix. Both fixable — just flag them before the test.');
+  if(state.D1?.value==='no')actions.push('<strong>Introduce SQSSO</strong> as the simplest authentication path. Ask if their team can generate a token server-side.');
+  if(state.D2?.value==='no')actions.push('<strong>Redirect to Grab & Go.</strong> Do not scope Custom iFrame. Present the code snippet option as a fast, zero-dev entry point.');
+  if(state.D2?.value==='limited'||state.D2?.value==='unknown')actions.push('<strong>Get a named technical contact</strong> before you leave this call. Ask: "Who specifically would own the integration side?"');
+  if(state.C1?.value==='scorm_dispatch')actions.push('<strong>Enable Content Vault</strong> in LU portal settings before the test starts. Confirm this with your technical contact.');
+  if(state.C1?.value==='assignment')actions.push('<strong>Flag assignment recording limitation.</strong> Confirm if it is needed in scope. If yes, dev team needs to apply the iFrame permission fix before testing.');
+  if(state.C1?.value==='offline')actions.push('<strong>Set expectations on offline download.</strong> Not supported in the embedded experience. Ask if streaming is acceptable as an alternative.');
+  if(state.C2?.value==='modules')actions.push('<strong>Clarify course vs module scope.</strong> LUA supports full courses only. Discuss wrapping their module in a short course as a workaround.');
+  if(state.E2?.value==='named')actions.push('<strong>Send Getting Started docs today.</strong> Do not wait — email the named technical contact directly with the documentation, SSO configuration guide, and iFrame code examples.');
+  if(state.E2?.value==='team'||state.E2?.value==='none')actions.push('<strong>Get a named technical contact before you leave this call.</strong> Ask: "Who specifically would own the integration side?" Without a name, the test has no owner and will not start.');
+  if(state.E2?.value==='external')actions.push('<strong>Confirm the agency has access and availability</strong> before scoping the test timeline. External dependencies can significantly extend the test window.');
+  if(state.A3?.value==='partial'||state.A3?.value==='none')actions.push('<strong>Help them define an MVP.</strong> Ask: "If you could embed one course in one place for one audience — what would that be?"');
+  if(actions.length===0)actions.push('<strong>Propose the test window.</strong> All signals positive. Agree 1-2 week validation — one embedded course in their environment. Get a date confirmed today.');
 
-  // Build next actions
-  const actions = [];
-  if (state.B1?.value === 'unknown') actions.push('<strong>Confirm app architecture first.</strong> Ask: "How is your platform built — native, hybrid, or browser?" Do not scope anything mobile until you have this answer.');
-  if (state.B1?.value === 'native') actions.push('<strong>Do not demo mobile Anywhere.</strong> Explain the Webview requirement clearly. Ask if their dev team can explore adding WebView support. Offer browser-based as interim.');
-  if (state.B1?.value === 'hybrid') actions.push('<strong>Confirm two hybrid limitations</strong> before the test: video/audio download is blocked, assignment recording needs a code fix. Both are fixable — just flag them upfront.');
-  if (state.D1?.value === 'no') actions.push('<strong>Introduce SQSSO.</strong> Explain it as the simplest path to authentication. Ask if their team can generate a token server-side.');
-  if (state.D2?.value === 'no') actions.push('<strong>Redirect to Grab & Go.</strong> Do not scope Custom iFrame. Present the code snippet option as a fast, zero-dev entry point.');
-  if (state.D2?.value === 'limited' || state.D2?.value === 'unknown') actions.push('<strong>Get a named technical contact</strong> before you leave this call. Ask: "Who specifically would own the integration side?"');
-  if (state.C1?.value === 'scorm_dispatch') actions.push('<strong>Enable Content Vault</strong> in the LU portal settings before the test starts. Flag this to your technical contact.');
-  if (state.C1?.value === 'assignment') actions.push('<strong>Flag assignment recording limitation</strong> to the prospect. Confirm if it is needed in the test scope. If yes, confirm their dev team can apply the iFrame permission fix.');
-  if (state.C1?.value === 'offline') actions.push('<strong>Set expectations on offline download.</strong> Not supported in the embedded experience. Ask if streaming is acceptable as an alternative.');
-  if (state.C2?.value === 'modules') actions.push('<strong>Clarify course vs module scope.</strong> LUA supports full courses only. Discuss wrapping their module in a short course as a workaround.');
-  if (state.E2?.value === 'now' || state.E2?.value === 'quarter') actions.push('<strong>Propose the test window on this call.</strong> One embedded course. Their environment. 1-2 weeks. Name a start date before you hang up.');
-  if (state.A3?.value === 'partial' || state.A3?.value === 'none') actions.push('<strong>Help them define an MVP.</strong> Ask: "If you could embed one course in one place for one audience — what would that be?" Get to a specific first use case.');
-  if (actions.length === 0) actions.push('<strong>Propose the test window.</strong> All signals are positive. Agree a 1-2 week validation with one embedded course in their environment. Get a date confirmed today.');
+  const techNote={browser:'Browser-based — fully supported. No limitations on any content type.',hybrid:'Hybrid app — functional with minor caveats. Flag video download block and assignment recording permission fix to dev team.',native:'Native app — WebView required before any embedded experience is possible.',unknown:'App architecture not yet confirmed — must be established before test scoping.'};
+  const techReadiness=techNote[state.B1?.value]||'Confirm app architecture before scoping.';
 
-  // Build proof point
-  const proofMap = {
-    frontline: 'Lead with <strong>Chick-fil-A</strong>: 300,000 users across 3,000 restaurants, compliance training embedded in their Pathway app. "Staff complete training right within the app — zero separate login, zero friction."',
-    customer: 'Lead with <strong>Visa</strong>: Support team from 5 to 0.5. 1 support ticket per 10,000 logins. 256,000 content views via LUA in 90 days. "Customers self-serve through embedded learning."',
-    partner: 'Lead with <strong>ChargePoint</strong>: 89% fewer customer support calls after embedding training. Fast time to value for a partner audience.',
-    employee: 'Lead with <strong>Coupa</strong>: $10M revenue generated through training. <strong>WebPT</strong>: 75% fewer training calls. Frame Anywhere as removing the barrier of navigating to a separate LMS.'
-  };
-  const proof = proofMap[state.A2?.value] || 'Lead with the impact numbers: 89% fewer support calls (ChargePoint), $10M revenue (Coupa), 18% CSAT improvement across LearnUpon customers.';
+  const actionsHTML=actions.map((a,i)=>`<div class="action-row"><div class="an">${i+1}</div><div class="at">${a}</div></div>`).join('');
+  const briefLines=[['Location',document.getElementById('b-location')?.textContent||'—'],['Audience',document.getElementById('b-audience')?.textContent||'—'],['MVP goal',document.getElementById('b-mvp')?.textContent||'—'],['App type',document.getElementById('b-app')?.textContent||'—'],['Mobile priority',document.getElementById('b-mobile')?.textContent||'—'],['Content',document.getElementById('b-content')?.textContent||'—'],['Scope',document.getElementById('b-scope')?.textContent||'—'],['SSO',document.getElementById('b-sso')?.textContent||'—'],['Dev resource',document.getElementById('b-dev')?.textContent||'—'],['Auth method',document.getElementById('b-auth')?.textContent||'—'],['Tech contact',document.getElementById('b-urgency')?.textContent||'—'],['LUA option',document.getElementById('b-option')?.textContent||'—']];
+  const briefHTML=briefLines.map(([k,v])=>`<div class="bfr"><div class="bfk">${k}</div><div class="bfv">${v}</div></div>`).join('');
+  const copyText='LEARNUPON ANYWHERE — TECHNICAL READINESS BRIEF\n\nVERDICT: '+tlVerdict.toUpperCase()+'\n\n'+briefLines.map(([k,v])=>k+': '+v).join('\n');
 
-  const actionsHTML = actions.map((a,i) => `<div class="action-row"><div class="an">${i+1}</div><div class="at">${a}</div></div>`).join('');
-
-  const briefLines = [
-    ['Location', document.getElementById('b-location')?.textContent || '—'],
-    ['Audience', document.getElementById('b-audience')?.textContent || '—'],
-    ['MVP goal', document.getElementById('b-mvp')?.textContent || '—'],
-    ['App type', document.getElementById('b-app')?.textContent || '—'],
-    ['Mobile priority', document.getElementById('b-mobile')?.textContent || '—'],
-    ['Content', document.getElementById('b-content')?.textContent || '—'],
-    ['Scope', document.getElementById('b-scope')?.textContent || '—'],
-    ['SSO', document.getElementById('b-sso')?.textContent || '—'],
-    ['Dev resource', document.getElementById('b-dev')?.textContent || '—'],
-    ['Auth method', document.getElementById('b-auth')?.textContent || '—'],
-    ['Urgency', document.getElementById('b-urgency')?.textContent || '—'],
-    ['LUA option', document.getElementById('b-option')?.textContent || '—'],
-  ];
-  const briefHTML = briefLines.map(([k,v]) => `<div class="brief-final-row"><div class="bfk">${k}</div><div class="bfv">${v}</div></div>`).join('');
-
-  const copyText = `LEARNUPON ANYWHERE — DEAL BRIEF\n\nVERDICT: ${tlVerdict.toUpperCase()}\n\n${briefLines.map(([k,v])=>`${k}: ${v}`).join('\n')}`;
-
-  const el = document.getElementById('result-wrap');
-  el.innerHTML = `
-    <div style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;">Deal Brief</div>
-    <div class="result-tl ${tlClass}">
-      <div class="rt-icon">${tlIcon}</div>
-      <div class="rt-verdict">${tlVerdict}</div>
-      <div class="rt-summary">${tlSummary}</div>
-    </div>
-    <div class="result-section">
-      <div class="rs-label">Next actions for this call</div>
-      ${actionsHTML}
-    </div>
-    <div class="result-section">
-      <div class="rs-label">Proof point to lead with</div>
-      <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;">${proof}</div>
-    </div>
-    <div class="result-section">
-      <div class="copy-row">
-        <div class="rs-label" style="margin-bottom:0;">Prospect brief — copy to Salesforce</div>
-        <button class="copy-btn" onclick="copyBrief(\`${copyText.replace(/`/g,"'")}\`)">COPY</button>
-      </div>
-      ${briefHTML}
-    </div>
-    <button class="btn-reset" onclick="resetTool()">← Qualify another prospect</button>
-  `;
+  const el=document.getElementById('result-wrap');
+  el.innerHTML=`<div style="font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;">Technical Readiness Brief</div>
+<div class="result-tl ${tlClass}"><div class="rt-icon">${tlIcon}</div><div class="rt-verdict">${tlVerdict}</div><div class="rt-summary">${tlSummary}</div></div>
+<div class="result-section"><div class="rs-label">Next actions for this call</div>${actionsHTML}</div>
+<div class="result-section"><div class="rs-label">Technical readiness summary</div><div style="font-size:14px;color:var(--ink2);line-height:1.7;">${techReadiness}</div></div>
+<div class="result-section"><div class="copy-row"><div class="rs-label" style="margin-bottom:0;">Prospect brief — copy to Salesforce</div><button class="copy-btn" onclick="copyBrief()">Copy brief</button></div>${briefHTML}</div>
+<button class="btn-reset" onclick="resetTool()">← Qualify another prospect</button>`;
   el.classList.add('show');
-  el.scrollIntoView({ behavior:'smooth', block:'start' });
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+  window._copyText=copyText;
 }
 
-function copyBrief(text) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.copy-btn');
-      if (btn) { btn.textContent = 'COPIED ✓'; setTimeout(() => btn.textContent = 'COPY', 2000); }
-    });
-  }
+function copyBrief(){
+  if(navigator.clipboard&&window._copyText){navigator.clipboard.writeText(window._copyText).then(()=>{const btn=document.querySelector('.copy-btn');if(btn){btn.textContent='Copied ✓';setTimeout(()=>btn.textContent='Copy brief',2000);}});}
 }
 
-function resetTool() {
-  Object.keys(state).forEach(k => delete state[k]);
-  document.querySelectorAll('.opt').forEach(o => o.className = 'opt');
-  document.querySelectorAll('.risk-card').forEach(rc => rc.classList.remove('show'));
-  document.querySelectorAll('.bv').forEach(b => { b.textContent = '—'; b.className = 'bv empty'; });
+function resetTool(){
+  Object.keys(state).forEach(k=>delete state[k]);
+  document.querySelectorAll('.opt').forEach(o=>o.className='opt');
+  document.querySelectorAll('.risk-card').forEach(rc=>rc.classList.remove('show'));
+  document.querySelectorAll('.bv').forEach(b=>{b.textContent='—';b.className='bv empty';});
   document.getElementById('result-wrap').classList.remove('show');
-  document.getElementById('result-wrap').innerHTML = '';
+  document.getElementById('result-wrap').innerHTML='';
   document.getElementById('btn-gen').classList.remove('ready');
   document.getElementById('escalate-box').classList.remove('show');
-  document.getElementById('ls-light').textContent = '—';
-  document.getElementById('ls-light').className = 'ls-light';
-  document.getElementById('ls-verdict').textContent = 'Answer questions to qualify';
-  document.getElementById('ls-sub').textContent = 'AWAITING INPUT';
-  document.getElementById('score-pills').innerHTML = '';
-  document.getElementById('hdr-light').className = 'score-light';
-  document.getElementById('hdr-verdict').textContent = 'Not yet assessed';
-  document.getElementById('q-screen').style.display = 'none';
-  document.getElementById('intro-screen').style.display = 'block';
-  window.scrollTo({ top:0, behavior:'smooth' });
+  document.getElementById('live-score').className='live-score';
+  document.getElementById('ls-emoji').textContent='—';
+  document.getElementById('ls-verdict').textContent='Answer questions to qualify';
+  document.getElementById('ls-sub').textContent='AWAITING INPUT';
+  document.getElementById('score-pills').innerHTML='';
+  document.getElementById('hdr-dot').className='hdr-dot';
+  document.getElementById('hdr-verdict').textContent='Not yet assessed';
+  document.getElementById('q-screen').style.display='none';
+  document.getElementById('intro-screen').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
